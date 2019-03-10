@@ -3,7 +3,10 @@
 {% block title %}Top-Notch{% endblock %}
 
 {% block body %}
-
+            {% if is_granted('ROLE_USER') %}
+                <h1>works</h1>
+            {% endif %}
+        <a href="{{ path('security_logout') }}">LOGOUT</a>
         <header class="box">
             <div class="scroll-featured">
                 <div class="scroll-featured-P">

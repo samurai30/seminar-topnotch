@@ -36,12 +36,31 @@
                 <div class="modal-content">
                     <h4>Login Form</h4>
                     <hr>
-                    <form>
+                    <form class="col s12" action="{{ path('security_login') }}" id="formLogin">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Username" id="username" name="_username" type="text" required="required" class="validate">
+                                <label for="first_name">Username</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input placeholder="password" name="_password" type="password" class="validate" required="required">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <div id="errorMessageLogin">
+
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button type="submit" id="Login" name="Login" class="btn-floating btn-large"><i class="material-icons">arrow_forward</i></button>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+
                 </div>
             </div>
             <div id="registerModal" class="modal">
@@ -60,7 +79,28 @@
         {% block javascripts %}
 
         <script src="{{ asset('build/app.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#formLogin').submit(function (e) {
+                    var form = $('#formLogin');
+                    e.preventDefault();
+                    var url = "{{ path('security_login') }}";
+                    console.log(form);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: form.serialize(),
+                        dataType:   'json',
+                        async:      true,
+                        success: function(data)
+                        {
+                            console.log(data)
 
+                        }
+                    });
+                });
+            });
+        </script>
         {% endblock %}
     </body>
 </html>
