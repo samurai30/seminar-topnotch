@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Top-Notch{% endblock %}</title>
         {% block stylesheets %}
             <link rel="icon" href="{{ asset('build/images/topN.11658e05.png') }}">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -10,9 +10,52 @@
         {% endblock %}
     </head>
     <body>
+    {% block loader %}
+        {{ include('loader/loader.html.twig') }}
+    {% endblock %}
+    <div id="homePage" style="display: none">
+        {% block navbar %}
+            <div class="navbar-fixed">
+                <nav id="navBar">
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo left"><img src="{{ asset('build/images/Logo.7554d491.png') }}" alt="logo" id="logo"></a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a class="modal-trigger" href="#loginModal" data-target="loginModal">Login</a></li>
+                            <li><a class="modal-trigger" href="#registerModal" data-target="registerModal">Register</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        {% endblock %}
         {% block body %}
 
         {% endblock %}
+
+        {% block modals %}
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <h4>Login Form</h4>
+                    <hr>
+                    <form>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+            <div id="registerModal" class="modal">
+                <div class="modal-content">
+                    <h4>Modal Header</h4>
+                    <p>A bunch of text</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        {% endblock %}
+
+    </div>
 
         {% block javascripts %}
 
