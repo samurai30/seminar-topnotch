@@ -27,8 +27,9 @@ $(window).on('load', function () {
             inDuration: 450,
             outDuration: 450,
             preventScrolling: true
-
         });
+        $('.sidenav').sidenav();
+
         $('.scrollspy').scrollSpy();
         $('.scrollspy').scrollSpy({
             offset: 70

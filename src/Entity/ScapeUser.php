@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ScapeUserRepository")
@@ -19,6 +20,8 @@ class ScapeUser implements UserInterface,\Serializable
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(min=5,max=30)
      */
     private $userFirstName;
 
@@ -29,21 +32,29 @@ class ScapeUser implements UserInterface,\Serializable
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $userEmail;
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Assert\NotBlank
+     * @Assert\Length(min=10,max=10)
      */
     private $userContact;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\NotBlank
+     * @Assert\Length(min=5,max=30)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(min=5,max=15)
      */
     private $password;
     /**

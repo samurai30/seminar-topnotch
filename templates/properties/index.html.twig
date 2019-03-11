@@ -1,20 +1,48 @@
-{% extends 'base.html.twig' %}
+<div class="row section scrollspy" id="properties">
+{% for props in properties %}
+<div class="col m4 s5">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ asset('build/images/topN.11658e05.png') }}">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">more_vert</i></span>
+            <p><a href="#">view property</a></p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">close</i></span>
+            <div class="m12">
+                <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
+                    <thead>
+                    <tr>
+                        <th>CITY</th>
+                        <th>NOTES</th>
+                        <th>STATUS</th>
+                    </tr>
 
-{% block title %}Hello PropertiesController!{% endblock %}
+                    </thead>
+                    <tbody>
+                    <tr>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+                        <td>{{ props.propertyAddress.propCity  }}</td>
+                        <td>{{ props.propNotes }}</td>
+                        <td>{{ props.propStatus }}</td>
+                    </tr>
+                    </tbody>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Samurai/Desktop/SEMINAR/topNotch/src/Controller/PropertiesController.php'|file_link(0) }}">src/Controller/PropertiesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Samurai/Desktop/SEMINAR/topNotch/templates/properties/index.html.twig'|file_link(0) }}">templates/properties/index.html.twig</a></code></li>
-    </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
-{% endblock %}
+{% endfor %}
+</div>
+<div class="row">
+
+        <div class="nav-wrapper" style="background: transparent">
+            {{ knp_pagination_render(properties) }}
+        </div>
+
+</div>

@@ -8,6 +8,7 @@
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% endblock %}
+
     </head>
     <body>
     {% block loader %}
@@ -18,14 +19,47 @@
             <div class="navbar-fixed">
                 <nav id="navBar">
                     <div class="nav-wrapper">
-                        <a href="#" class="brand-logo left"><img src="{{ asset('build/images/Logo.7554d491.png') }}" alt="logo" id="logo"></a>
+                        <a href="{{ path('homepage') }}" class="brand-logo left"><img src="{{ asset('build/images/Logo.7554d491.png') }}" alt="logo" id="logo"></a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            {% if is_granted('ROLE_USER') %}
+                                <li>User: {{ app.user.username }}</li>
+                                <li><a class="modal-trigger" href="{{ path('security_logout') }}">Logout</a></li>
+                            {% else %}
                             <li><a class="modal-trigger" href="#loginModal" data-target="loginModal">Login</a></li>
                             <li><a class="modal-trigger" href="#registerModal" data-target="registerModal">Register</a></li>
+                            {% endif %}
                         </ul>
+                        <a href="#" data-target="slide-out" class="sidenav-trigger right show-on-medium-and-down"><i class="material-icons">menu</i></a>
+
                     </div>
+
                 </nav>
+
             </div>
+            <ul id="slide-out" class="sidenav">
+                {% if is_granted('ROLE_USER') %}
+
+
+
+                    <li><div class="user-view">
+                            <div class="background cyan">
+
+                            </div>
+                            <a href="#user"><img class="circle" src="{{ asset('build/images/Logo.7554d491.png') }}"></a>
+
+                            <a href="#"><span class="white-text name">{{ app.user.username }}</span></a>
+                            <a href="#"><span class="white-text email">{{ app.user.userEmail }}</span></a>
+                        </div></li>
+
+                    <li><div class="divider"></div></li>
+                    <li><a class="modal-trigger waves-effect" href="{{ path('security_logout') }}">Logout</a></li>
+
+                {% else %}
+                    <li><a class="modal-trigger" href="#loginModal" data-target="loginModal">Login</a></li>
+                    <li><div class="divider"></div></li>
+                    <li><a class="modal-trigger" href="#registerModal" data-target="registerModal">Register</a></li>
+                {% endif %}
+            </ul>
         {% endblock %}
         {% block body %}
 
@@ -33,7 +67,7 @@
 
         {% block modals %}
             <div id="loginModal" class="modal">
-                <div class="modal-content">
+                <div class="modal-content light-blue-text text-lighten-4">
 
                     <h4>Login Form</h4>
                     <hr>
@@ -50,12 +84,12 @@
                             </div>
                         </div>
                         <div class="row center">
-                            <div id="errorMessageLogin">
+                            <div id="errorMessageLogin" class="red-text text-darken-1">
 
                             </div>
                         </div>
                         <div class="row right">
-                            <button type="submit" id="Login" name="Login" class="btn-floating btn-large"><i class="material-icons">arrow_forward</i></button>
+                            <button type="submit" id="Login" name="Login" class="btn-floating btn-large light-blue lighten-2"><i class="material-icons">arrow_forward</i></button>
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
