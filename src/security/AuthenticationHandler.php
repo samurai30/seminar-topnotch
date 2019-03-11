@@ -53,7 +53,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $array = array( 'success' => false, 'message' => $exception->getMessage() ); // data to return via JSON
+        $array = array( 'success' => false, 'message' => $exception->getMessage() );
         $response = new Response( json_encode( $array ) );
         $response->headers->set( 'Content-Type', 'application/json' );
         return $response;

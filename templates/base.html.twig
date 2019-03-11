@@ -34,8 +34,10 @@
         {% block modals %}
             <div id="loginModal" class="modal">
                 <div class="modal-content">
+
                     <h4>Login Form</h4>
                     <hr>
+
                     <form class="col s12" action="{{ path('security_login') }}" id="formLogin">
                         <div class="row">
                             <div class="input-field col s12">
@@ -60,7 +62,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-
+                    <div class="progress" id="loginLoader" style="display:none;">
+                        <div class="indeterminate"></div>
+                    </div>
                 </div>
             </div>
             <div id="registerModal" class="modal">
@@ -82,6 +86,7 @@
         <script>
             $(document).ready(function () {
                 $('#formLogin').submit(function (e) {
+                    $('#loginLoader').show();
                     var form = $('#formLogin');
                     e.preventDefault();
                     var url = "{{ path('security_login') }}";
@@ -91,10 +96,20 @@
                         url: url,
                         data: form.serialize(),
                         dataType:   'json',
-                        async:      true,
+                        async:      false,
                         success: function(data)
                         {
-                            console.log(data)
+                           setTimeout(function () {
+                               $('#loginLoader').hide();
+                           },600);
+                            if(data.success === true){
+                                $(location).attr('href','{{ path('homepage') }}')
+                            }else{
+                                if(data.message === 'Bad credentials.'){
+                                    $('#errorMessageLogin').append('<p>Invalid username or password</p>');
+                                }
+
+                            }
 
                         }
                     });
