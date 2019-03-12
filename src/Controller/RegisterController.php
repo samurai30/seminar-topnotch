@@ -33,6 +33,7 @@ class RegisterController extends AbstractController
 
     /**
      * @Route("/api/register", name="register")
+     * @param UserPasswordEncoderInterface $encoder
      * @param Request $request
      * @return JsonResponse
      */
