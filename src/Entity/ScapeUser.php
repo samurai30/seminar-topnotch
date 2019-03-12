@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ScapeUserRepository")
+ * @UniqueEntity(fields="userEmail", message="This E-mail is already used")\
+ * @UniqueEntity(fields="username", message="This username is already taken")
  */
 class ScapeUser implements UserInterface,\Serializable
 {
@@ -21,17 +24,19 @@ class ScapeUser implements UserInterface,\Serializable
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
-     * @Assert\Length(min=5,max=30)
+     * @Assert\Length(min=3,max=30)
      */
     private $userFirstName;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(min=3,max=30)
      */
     private $userLastName;
 
     /**
-     * @ORM\Column(type="string", length=120)
+     * @ORM\Column(type="string", length=120, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
      */
@@ -45,17 +50,32 @@ class ScapeUser implements UserInterface,\Serializable
     private $userContact;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=60, unique=true)
      * @Assert\NotBlank
      * @Assert\Length(min=5,max=30)
      */
     private $username;
 
+
+
+    private $plainPassword;
+
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank
-     * @Assert\Length(min=5,max=15)
+     * @return mixed
      */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
     private $password;
     /**
      * @var array

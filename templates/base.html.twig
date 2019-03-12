@@ -101,11 +101,13 @@
             </div>
             <div id="registerModal" class="modal">
                 <div class="modal-content">
-                    <h4>Modal Header</h4>
+                    <h4>Register Form</h4>
+                    <div id="registerFormContainer">
 
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+
                 </div>
             </div>
         {% endblock %}
@@ -115,38 +117,53 @@
         {% block javascripts %}
 
         <script src="{{ asset('build/app.js') }}"></script>
+
         <script>
-            $(document).ready(function () {
-                $('#formLogin').submit(function (e) {
-                    $('#loginLoader').show();
-                    var form = $('#formLogin');
-                    e.preventDefault();
-                    var url = "{{ path('security_login') }}";
-                    console.log(form);
-                    $.ajax({
-                        type: "post",
-                        url: url,
-                        data: form.serialize(),
-                        dataType:   'json',
-                        async:      false,
-                        success: function(data)
-                        {
-                           setTimeout(function () {
-                               $('#loginLoader').hide();
-                           },600);
-                            if(data.success === true){
-                                $(location).attr('href','{{ path('homepage') }}')
-                            }else{
-                                if(data.message === 'Bad credentials.'){
-                                    $('#errorMessageLogin').append('<p>Invalid username or password</p>');
-                                }
-
+            function login(form,loader){
+                $(loader).show();
+                var form = $(form);
+                var url = "{{ path('security_login') }}";
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: form.serialize(),
+                    dataType:   'json',
+                    async:      false,
+                    success: function(data)
+                    {
+                        setTimeout(function () {
+                            $('#loginLoader').hide();
+                        },600);
+                        if(data.success === true){
+                            $(location).attr('href','{{ path('homepage') }}')
+                        }else{
+                            if(data.message === 'Bad credentials.'){
+                                $('#errorMessageLogin').append('<p>Invalid username or password</p>');
                             }
-
                         }
-                    });
+                    }
                 });
+            }
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: "{{ path('register') }}",
+                    type:       'POST',
+                    dataType:   'json',
+                    async:      true,
+                    success: function (data) {
+                        document.getElementById("registerFormContainer").innerHTML = data.form;
+                    }
+                });
+
+                $('#formLogin').submit(function (event) {
+                    event.preventDefault();
+                    login(this,'#loginLoader');
+                });
+
             });
+
         </script>
         {% endblock %}
     </body>

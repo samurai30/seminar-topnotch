@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ScapeUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,11 +15,11 @@ class ScapeUserType extends AbstractType
         $builder
             ->add('userFirstName')
             ->add('userLastName')
+            ->add('username')
+            ->add('plainPassword')
             ->add('userEmail')
             ->add('userContact')
-            ->add('username')
-            ->add('password')
-            ->add('roles')
+            ->add('REGISTER', SubmitType::class)
         ;
     }
 

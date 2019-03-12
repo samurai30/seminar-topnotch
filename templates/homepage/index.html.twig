@@ -5,7 +5,7 @@
         <header class="box">
             <div class="scroll-featured">
                 <div class="scroll-featured-P">
-                    <a href="#properties" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');">
+                    <a href="#propertyContainer" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');">
 
                     </a>
                 </div>
@@ -28,15 +28,15 @@
         <!-- feature discovery!-->
 
         <!-- properties!-->
-        <div class="center-align">
-            <h3>PROPERTIES</h3>
 
-        </div>
-        <div class="container" id="propertyContainer">
+        <div class="container section scrollspy" id="propertyContainer">
 
+                {#
+                {{ render(controller('App\\Controller\\PropertiesController::properties')) }}
+                #}
 
-              {{ render(controller('App\\Controller\\PropertiesController::properties')) }}
-
+            <div class="row">
+            </div>
 
         </div>
         <!-- properties!-->

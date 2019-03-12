@@ -1,13 +1,21 @@
 const $ = require('jquery');
+
 global.$ = global.jQuery = $;
 
 require('../css/app.css');
 require('materialize-css');
 require('materialize-css/dist/js/materialize');
 require('../sass/sass.scss');
+const axios = require('axios/dist/axios');
+$('#registerFormContainer').on("submit",function (e) {
+    e.preventDefault();
+    var formData = new FormData(e.target);
+    axios.post('/api/register', formData).then((response)=>{
+        $('#registerFormContainer').html(response.data.form);
+    })
 
+});
 $(window).on('load', function () {
-
 
     $('#preloader').delay(400).fadeOut('slow');
     $('#loader')
