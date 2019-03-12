@@ -13,7 +13,11 @@ $('#registerFormContainer').on("submit",function (e) {
     e.preventDefault();
     var formData = new FormData(e.target);
     axios.post('/api/register', formData).then((response)=>{
-        $('#registerFormContainer').html(response.data.form);
+       if(response.status === 200){
+           $('#registerFormContainer').html(response.data.form);
+       }else if(response.status === 202){
+
+       }
     })
 
 });
