@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
@@ -16,8 +18,11 @@ class LoginController extends AbstractController
 {
     /**
      * @Rest\Post("/api/login", name="security_login")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function login(){
+    public function login(Request $request){
+
         return $this->redirectToRoute('homepage');
     }
     /**

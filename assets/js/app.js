@@ -31,9 +31,7 @@ $(window).on('load', function () {
         $('.sidenav').sidenav();
 
         $('.scrollspy').scrollSpy();
-        $('.scrollspy').scrollSpy({
-            offset: 70
-        });
+
     }, 600);
 
 
