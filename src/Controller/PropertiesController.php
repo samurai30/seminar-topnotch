@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\ScapeProperties;
 use App\Repository\FeaturedRepository;
 use App\Repository\ScapePropertiesRepository;
 use Doctrine\ORM\EntityManagerInterface;

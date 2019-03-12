@@ -10,6 +10,7 @@ security:
             security: false
         main:
             anonymous: true
+            pattern: ^(?!api|_(profiler|wdt)).*
             provider: database_users
             form_login:
                 check_path: security_login
