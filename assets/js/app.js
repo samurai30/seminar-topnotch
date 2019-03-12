@@ -7,6 +7,8 @@ require('materialize-css');
 require('materialize-css/dist/js/materialize');
 require('../sass/sass.scss');
 const axios = require('axios/dist/axios');
+
+/*ajax register form*/
 $('#registerFormContainer').on("submit",function (e) {
     e.preventDefault();
     var formData = new FormData(e.target);
@@ -15,6 +17,9 @@ $('#registerFormContainer').on("submit",function (e) {
     })
 
 });
+/*ajax register form*/
+
+/* pre loading */
 $(window).on('load', function () {
 
     $('#preloader').delay(400).fadeOut('slow');
@@ -45,6 +50,8 @@ $(window).on('load', function () {
 
 
 });
+/* pre loading */
+
 $(window).scroll(function(){
     var wScroll = $(this).scrollTop();
     $('.main_pageL').css({
