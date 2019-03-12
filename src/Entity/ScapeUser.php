@@ -76,6 +76,9 @@ class ScapeUser implements UserInterface,\Serializable
         $this->plainPassword = $plainPassword;
     }
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
     private $password;
     /**
      * @var array
