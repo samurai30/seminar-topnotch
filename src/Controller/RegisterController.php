@@ -18,22 +18,16 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class RegisterController extends AbstractController
 {
     /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
-    /**
      * @var FlashBagInterface
      */
     private $flashBag;
 
     /**
      * RegisterController constructor.
-     * @param UserPasswordEncoderInterface $encoder
      * @param FlashBagInterface $flashBag
      */
-    public function __construct(UserPasswordEncoderInterface $encoder,FlashBagInterface $flashBag)
+    public function __construct(FlashBagInterface $flashBag)
     {
-        $this->encoder = $encoder;
         $this->flashBag = $flashBag;
     }
 
@@ -42,25 +36,26 @@ class RegisterController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function register(Request $request)
+    public function register(UserPasswordEncoderInterface $encoder,Request $request)
     {
         $user = new ScapeUser();
         $form = $this->createForm(ScapeUserType::class,$user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            return $this->json($user, Response::HTTP_ACCEPTED);
-        }
-
-
-        /*if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            $password = $this->encoder->encodePassword($user,$user->getPlainPassword());
+            $password = $encoder->encodePassword($user,$user->getPlainPassword());
             $user->setPassword($password);
             $user->setRoles(['ROLE_USER']);
             $em->persist($user);
             $em->flush();
-            $this->flashBag->add('registered', 'Registered Successfully');
+            $this->flashBag->add('Registered', 'Registered Successfully');
+            return $this->json('worked', Response::HTTP_ACCEPTED);
+        }
+
+
+        /*if($form->isSubmitted() && $form->isValid()){
+
             return $this->json('worked',Response::HTTP_OK);
         }*/
         $formData = $this->renderView('form/register.html.twig',[

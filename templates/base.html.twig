@@ -15,6 +15,7 @@
         {{ include('loader/loader.html.twig') }}
     {% endblock %}
     <div id="homePage" style="display: none">
+
         {% block navbar %}
             <div class="navbar-fixed">
                 <nav id="navBar">
@@ -146,7 +147,9 @@
             }
 
             $(document).ready(function () {
-
+                {% for msg in app.flashes('Registered') %}
+                   M.toast({html: '{{ msg }}', classes: 'rounded'});
+                {% endfor %}
                 $.ajax({
                     url: "{{ path('register') }}",
                     type:       'POST',

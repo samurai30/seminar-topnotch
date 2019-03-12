@@ -52,16 +52,7 @@ class AppFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $user = new ScapeUser();
-        $user->setUsername('samurai');
-        $user->setPassword($this->userPasswordEncoder->encodePassword($user,'suyog'));
-        $user->setUserEmail('suyog@gmail.com');
-        $user->setUserContact('8975501896');
-        $user->setUserFirstName('suyog');
-        $user->setUserLastName('Mishal');
-        $user->setRoles(['ROLE_USER']);
-        $manager->persist($user);
-        $manager->flush();
+
         $this->loadCat($manager);
         $this->loadFeatured($manager);
         $this->loadProp($manager);

@@ -16,7 +16,7 @@ $('#registerFormContainer').on("submit",function (e) {
        if(response.status === 200){
            $('#registerFormContainer').html(response.data.form);
        }else if(response.status === 202){
-
+           $(location).attr('href','/');
        }
     })
 
