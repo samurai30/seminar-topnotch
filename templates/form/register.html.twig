@@ -1,2 +1,23 @@
 {% form_theme form 'themes/materialize.html.twig' %}
-{{ form(form) }}
+{{ form_start(form) }}
+        {{ form_errors(form.userFirstName) }}
+        {{ form_widget(form.userFirstName) }}
+        {{ form_errors(form.userLastName) }}
+        {{ form_widget(form.userLastName) }}
+        {{ form_errors(form.username) }}
+        {{ form_widget(form.username) }}
+        {{ form_errors(form.plainPassword) }}
+
+        {{ form_label(form.plainPassword) }}
+        {{ form_widget(form.plainPassword) }}
+        {{ form_errors(form.userEmail) }}
+        {{ form_widget(form.userEmail) }}
+        {{ form_errors(form.userContact) }}
+        {{ form_widget(form.userContact) }}
+        {{ form_label(form.address)}}
+        {{ form_row(form.address.city) }}
+        {{ form_row(form.address.pincode) }}
+<div class="row right">
+    <button type="submit" id="Login" name="Login" class="btn-floating btn-large"><i class="material-icons">arrow_forward</i></button>
+</div>
+{{ form_end(form) }}

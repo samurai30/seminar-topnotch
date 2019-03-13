@@ -6,7 +6,7 @@ body{
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
 }
-.modal { max-height: 100%; overflow: visible}
+.modal { max-height: 100%; max-width:500px;}
 #navBar{
     background: rgba(0,0,0,0.3);
     box-shadow: none;

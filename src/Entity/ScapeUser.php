@@ -57,8 +57,18 @@ class ScapeUser implements UserInterface,\Serializable
     private $username;
 
 
-
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(min=5,max=15)
+     */
     private $plainPassword;
+
+    /**
+     * @Assert\IsTrue(message="The password cannot match your first name")
+     */
+    public function isPasswordSafe(){
+       return $this->username !== $this->plainPassword;
+    }
 
     /**
      * @return mixed
@@ -85,6 +95,14 @@ class ScapeUser implements UserInterface,\Serializable
      * @ORM\Column(type="simple_array")
      */
     private $roles;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ScapeUserAddress", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Type(type="App\Entity\ScapeUserAddress")
+     * @Assert\Valid
+     */
+    private $address;
 
     public function getId(): ?int
     {
@@ -241,6 +259,18 @@ class ScapeUser implements UserInterface,\Serializable
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getAddress(): ?ScapeUserAddress
+    {
+        return $this->address;
+    }
+
+    public function setAddress(ScapeUserAddress $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

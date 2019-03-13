@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\ScapeUser;
+use App\Entity\ScapeUserAddress;
 use App\Form\ScapeUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,6 +41,7 @@ class RegisterController extends AbstractController
     public function register(UserPasswordEncoderInterface $encoder,Request $request)
     {
         $user = new ScapeUser();
+        $address =new ScapeUserAddress();
         $form = $this->createForm(ScapeUserType::class,$user);
         $form->handleRequest($request);
 

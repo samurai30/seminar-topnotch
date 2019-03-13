@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ScapeUserAddressRepository")
@@ -18,10 +19,14 @@ class ScapeUserAddress
 
     /**
      * @ORM\Column(type="string", length=6)
+     * @Assert\NotBlank
+     * @Assert\Length(min=6,max=6)
      */
     private $pincode;
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank
+     * @Assert\Length(max=30)
      */
     private $city;
 
