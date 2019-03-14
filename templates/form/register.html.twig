@@ -10,7 +10,9 @@
 
         {{ form_label(form.plainPassword) }}
         {{ form_widget(form.plainPassword) }}
-        {{ form_errors(form.userEmail) }}
+        <div class="red-text">
+                {{ form_errors(form.userEmail) }}
+        </div>
         {{ form_widget(form.userEmail) }}
         {{ form_errors(form.userContact) }}
         {{ form_widget(form.userContact) }}

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 class PropertiesController extends AbstractController
 {
@@ -34,7 +35,7 @@ class PropertiesController extends AbstractController
     }
 
     /**
-     * @Route("/properties", name="properties")
+     * @Route("/api/properties", name="properties")
      * @param ScapePropertiesRepository $propertiesRepository
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -45,16 +46,16 @@ class PropertiesController extends AbstractController
         $propQuery = $propertiesRepository->createQueryBuilder('p')
             ->getQuery();
 
-
-
         $props = $this->paginator->paginate($propQuery,
             $request->query->getInt('page',1),1);
 
 
-
-        return $this->render('properties/index.html.twig', [
+        $properties = $this->render('properties/index.html.twig', [
             'properties' => $props
         ]);
+
+        return $this->json(['property' => $properties], Response::HTTP_ACCEPTED);
+
     }
 
     /**

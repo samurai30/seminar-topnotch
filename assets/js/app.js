@@ -15,13 +15,44 @@ $('#registerFormContainer').on("submit",function (e) {
     axios.post('/api/register', formData).then((response)=>{
        if(response.status === 200){
            $('#registerFormContainer').html(response.data.form);
+
        }else if(response.status === 202){
            $(location).attr('href','/');
        }
     })
 
 });
+
+
 /*ajax register form*/
+
+
+/*ajax properties*/
+
+$('#propertyContainer').on('click', function (e) {
+    var url = e.target.getAttribute('href');
+    console.log(url);
+    axios.post(url).then((response)=>{
+
+        $('#propertyContainer').html(response.data.property.content);
+
+    });
+
+    e.preventDefault();
+});
+
+$(document).ready(function () {
+
+    axios.post('/api/properties').then((response)=>{
+
+        $('#propertyContainer').html(response.data.property.content);
+        
+    })
+    
+    
+});
+
+/*ajax properties*/
 
 /* pre loading */
 $(window).on('load', function () {
