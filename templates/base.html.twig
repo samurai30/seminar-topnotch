@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Scape-360{% endblock %}</title>
@@ -44,7 +44,7 @@
                             <div class="background cyan">
 
                             </div>
-                            <a href="#user"><img class="circle" src="{{ asset('build/images/Logo.7554d491.png') }}"></a>
+                            <a href="#"><img class="circle" src="{{ asset('build/images/Logo.7554d491.png') }}" alt="UserImage"></a>
 
                             <a href="#"><span class="white-text name">{{ app.user.username }}</span></a>
                             <a href="#"><span class="white-text email">{{ app.user.userEmail }}</span></a>
@@ -120,16 +120,16 @@
         <script src="{{ asset('build/app.js') }}"></script>
 
         <script>
-            function login(form,loader){
+            function login(forms,loader){
                 $(loader).show();
-                var form = $(form);
+                var form = $(forms);
                 var url = "{{ path('security_login') }}";
                 $.ajax({
                     type: "post",
                     url: url,
                     data: form.serialize(),
                     dataType:   'json',
-                    async:      false,
+                    async:      true,
                     success: function(data)
                     {
                         setTimeout(function () {
@@ -139,7 +139,7 @@
                             $(location).attr('href','{{ path('homepage') }}')
                         }else{
                             if(data.message === 'Bad credentials.'){
-                                $('#errorMessageLogin').append('<p>Invalid username or password</p>');
+                                $('#errorMessageLogin').html('<p>Invalid username or password</p>');
                             }
                         }
                     }
@@ -156,7 +156,8 @@
                     dataType:   'json',
                     async:      true,
                     success: function (data) {
-                        document.getElementById("registerFormContainer").innerHTML = data.form;
+
+                        $('#registerFormContainer').html(data.form)
                     }
                 });
 
