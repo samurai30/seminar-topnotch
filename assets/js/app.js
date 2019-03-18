@@ -44,12 +44,8 @@ $('#propertyContainer').on('click', function (e) {
 $(document).ready(function () {
 
     axios.post('/api/properties').then((response)=>{
-
         $('#propertyContainer').html(response.data.property.content);
-        
     })
-    
-    
 });
 
 /*ajax properties*/
@@ -78,7 +74,7 @@ $(window).on('load', function () {
 
         });
         $('.sidenav').sidenav();
-
+        $('.parallax').parallax();
         $('.scrollspy').scrollSpy();
 
     }, 600);
@@ -87,20 +83,3 @@ $(window).on('load', function () {
 
 });
 /* pre loading */
-
-$(window).scroll(function(){
-    var wScroll = $(this).scrollTop();
-    $('.main_pageL').css({
-        'transform' : 'translate(0px, '+wScroll/2-'%)'
-    });
-    $('.main_pageB1').css({
-        'transform' : 'translate(0px, -'+wScroll/300+'%)'
-    });
-    $('.main_pageB2').css({
-        'transform' : 'translate(0px, '+wScroll/30+'%)'
-    });
-    $('.main_fill').css({
-        'transform' : 'translate(0px, '+wScroll/190+'%)'
-    });
-
-});
