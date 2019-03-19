@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "274acec9a81986eca628eca54e570967",
+    "content-hash": "663c5bef79e7f086b035cedf9bd8e501",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1582,6 +1582,66 @@
                 "symfony"
             ],
             "time": "2019-02-28T13:51:20+00:00"
+        },
+        {
+            "name": "lexik/form-filter-bundle",
+            "version": "v5.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikFormFilterBundle.git",
+                "reference": "25f5b77a2605eef7b363cb6f666cacbbce89d40c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/25f5b77a2605eef7b363cb6f666cacbbce89d40c",
+                "reference": "25f5b77a2605eef7b363cb6f666cacbbce89d40c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4.8",
+                "php": ">=5.5.9",
+                "symfony/form": "~2.8|~3.0|^4.0",
+                "symfony/framework-bundle": "~2.8|~3.0|^4.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm-bundle": "~3.0",
+                "phpunit/phpunit": "^5.7|~6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lexik\\Bundle\\FormFilterBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                },
+                {
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr"
+                }
+            ],
+            "description": "This bundle aim to provide classes to build some form filters and then build a doctrine query from this form filter.",
+            "homepage": "https://github.com/lexik/LexikFormFilterBundle",
+            "keywords": [
+                "bundle",
+                "doctrine",
+                "filter",
+                "form",
+                "symfony"
+            ],
+            "time": "2019-01-22T07:06:13+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\ScapeProperties;
+use App\Form\PropertyFilterType;
 use App\Repository\FeaturedRepository;
 use App\Repository\ScapePropertiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,15 +65,29 @@ class PropertiesController extends AbstractController
      * @Route("/featured",name="feature_properties")
      * @param FeaturedRepository $featuredRepository
      * @param ScapePropertiesRepository $propertiesRepository
+     * @param Request $request
+     * @param FilterBuilderUpdater $builderUpdater
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function featuredProperties(FeaturedRepository $featuredRepository,ScapePropertiesRepository $propertiesRepository){
+    public function featuredProperties(FeaturedRepository $featuredRepository,ScapePropertiesRepository $propertiesRepository,Request $request,FilterBuilderUpdater $builderUpdater){
 
-        $fprop = $featuredRepository->findByType('weekly');
+       /* $fprop = $featuredRepository->findByType('weekly');
 
         return $this->render('properties/raw.html.twig', [
             'properties' =>  $fprop
-        ]);
+        ]);*/
+       $property = new ScapeProperties();
+       $form = $this->createForm(PropertyFilterType::class,$property);
+       $form->handleRequest($request);
+       if($form->isSubmitted()){
+          $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
+           $builderUpdater->addFilterConditions($form,$filterbuilder);
+           $filterbuilder->getQuery()->getResult();
+          dump($filterbuilder->getQuery()->getResult());die;
+       }
+       return $this->render('properties/raw.html.twig',[
+           'form' => $form->createView()
+       ]);
 
     }
 }
