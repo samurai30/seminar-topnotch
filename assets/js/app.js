@@ -54,7 +54,7 @@ $('#propertyContainer').on('click', function (e) {
         let Itag = $(e.target).parent();
         let url = Itag.attr('href');
         console.log(url);
-        if(url && url!='#!'){
+        if(url && url!='#!' && url.startsWith("/api/properties")){
             $('#propertyContainer').html(loader);
             axios.post(url).then((response)=>{
                 $('#propertyContainer').html(response.data.property.content);
@@ -62,7 +62,7 @@ $('#propertyContainer').on('click', function (e) {
         }
     }else if(par === 'A'){
         let url = e.target.getAttribute('href');
-        if(url && url!='#!'){
+        if(url && url!='#!' && url.startsWith("/api/properties")){
             $('#propertyContainer').html(loader);
             axios.post(url).then((response)=>{
                 $('#propertyContainer').html(response.data.property.content);
