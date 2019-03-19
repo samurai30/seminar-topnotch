@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Featured;
 use App\Entity\ScapeProperties;
 use App\Form\PropertyFilterType;
 use App\Repository\FeaturedRepository;
@@ -77,7 +78,8 @@ class PropertiesController extends AbstractController
             'properties' =>  $fprop
         ]);*/
        $property = new ScapeProperties();
-       $form = $this->createForm(PropertyFilterType::class,$property);
+       $featured = new Featured();
+       $form = $this->createForm(PropertyFilterType::class);
        $form->handleRequest($request);
        if($form->isSubmitted()){
           $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
