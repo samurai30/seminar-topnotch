@@ -30,22 +30,9 @@ $('#registerFormContainer').on("submit",function (e) {
 /*ajax properties*/
 
 $('#propertyContainer').on('click', function (e) {
-    var loader = "  <div class='container center'>\n" +
-        "\n" +
-        "\n" +
-        "                <div class=\"preloader-wrapper big active\">\n" +
-        "                    <div class=\"spinner-layer spinner-blue-only\">\n" +
-        "                        <div class=\"circle-clipper left\">\n" +
-        "                            <div class=\"circle\"></div>\n" +
-        "                        </div><div class=\"gap-patch\">\n" +
-        "                            <div class=\"circle\"></div>\n" +
-        "                        </div><div class=\"circle-clipper right\">\n" +
-        "                            <div class=\"circle\"></div>\n" +
-        "                        </div>\n" +
-        "                    </div>\n" +
-        "                </div>\n" +
-        "\n" +
-        "            </div>";
+    var loader = "<div class=\"progress\">\n" +
+        "      <div class=\"indeterminate\"></div>\n" +
+        "  </div>";
 
 
     let par = e.target.nodeName;
@@ -55,7 +42,7 @@ $('#propertyContainer').on('click', function (e) {
         let url = Itag.attr('href');
         console.log(url);
         if(url && url!=='#!' && url.startsWith("/api/properties")){
-            $('#propertyContainer').html(loader);
+            $('#loaderProperties').html(loader);
             axios.post(url).then((response)=>{
                 $('#propertyContainer').html(response.data.property.content);
             });
@@ -63,7 +50,7 @@ $('#propertyContainer').on('click', function (e) {
     }else if(par === 'A'){
         let url = e.target.getAttribute('href');
         if(url && url!=='#!' && url.startsWith("/api/properties")){
-            $('#propertyContainer').html(loader);
+            $('#loaderProperties').html(loader);
             axios.post(url).then((response)=>{
                 $('#propertyContainer').html(response.data.property.content);
             });
