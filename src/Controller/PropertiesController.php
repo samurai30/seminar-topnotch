@@ -46,7 +46,6 @@ class PropertiesController extends AbstractController
      */
     public function properties(ScapePropertiesRepository $propertiesRepository,Request $request)
     {
-        $em = $this->manager;
         $propQuery = $propertiesRepository->createQueryBuilder('p')
             ->getQuery();
 
@@ -61,35 +60,49 @@ class PropertiesController extends AbstractController
         return $this->json(['property' => $properties], Response::HTTP_ACCEPTED);
 
     }
-
     /**
-     * @Route("/featured",name="feature_properties")
-     * @param FeaturedRepository $featuredRepository
-     * @param ScapePropertiesRepository $propertiesRepository
+     * @Route("/api/FilterProperties",name="Filter_Properties")
      * @param Request $request
      * @param FilterBuilderUpdater $builderUpdater
+     * @return Response
+     */
+
+    public function FilterProperties(Request $request,FilterBuilderUpdater $builderUpdater){
+
+        $form = $this->createForm(PropertyFilterType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+            $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
+            $builderUpdater->addFilterConditions($form,$filterbuilder);
+            $filterbuilder->getQuery()->getResult();
+            $props = $this->paginator->paginate($filterbuilder->getQuery(),
+                $request->query->getInt('page',1),1);
+
+            return $this->render('properties/index.html.twig',[
+                'properties' => $props
+            ]);
+        }
+        return $this->render('properties/raw.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/featured/{type}",name="feature_properties")
+     * @param FeaturedRepository $featuredRepository
+     * @param $type
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function featuredProperties(FeaturedRepository $featuredRepository,ScapePropertiesRepository $propertiesRepository,Request $request,FilterBuilderUpdater $builderUpdater){
+    public function featuredProperties(FeaturedRepository $featuredRepository,$type){
 
-       /* $fprop = $featuredRepository->findByType('weekly');
-
+        $fprop = $featuredRepository->findByType($type);
+        var_dump($fprop);die;
         return $this->render('properties/raw.html.twig', [
             'properties' =>  $fprop
-        ]);*/
-       $property = new ScapeProperties();
-       $featured = new Featured();
-       $form = $this->createForm(PropertyFilterType::class);
-       $form->handleRequest($request);
-       if($form->isSubmitted()){
-          $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
-           $builderUpdater->addFilterConditions($form,$filterbuilder);
-           $filterbuilder->getQuery()->getResult();
-          dump($filterbuilder->getQuery()->getResult());die;
-       }
-       return $this->render('properties/raw.html.twig',[
-           'form' => $form->createView()
-       ]);
+        ]);
+
+
 
     }
+
+
 }
