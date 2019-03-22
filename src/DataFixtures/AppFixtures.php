@@ -32,6 +32,42 @@ class AppFixtures extends Fixture
             'district' => 'North',
             'taluka' => 'Bardez',
 
+        ],
+        [
+            'name' => 'Denver Housing',
+            'notes' => 'bla bla bla',
+            'status' => 'unavailable',
+            'city' => 'Aldona',
+            'district' => 'North',
+            'taluka' => 'Bardez',
+
+        ],
+        [
+            'name' => 'Clinton Villas',
+            'notes' => 'bla bla bla',
+            'status' => 'unavailable',
+            'city' => 'Colvale',
+            'district' => 'North',
+            'taluka' => 'Bardez',
+
+        ],
+        [
+            'name' => 'Ezze Villas',
+            'notes' => 'bla bla bla',
+            'status' => 'available',
+            'city' => 'Mapusa',
+            'district' => 'North',
+            'taluka' => 'Bardez',
+
+        ],
+        [
+            'name' => 'Collin Noob',
+            'notes' => 'bla bla bla',
+            'status' => 'available',
+            'city' => 'Margao',
+            'district' => 'South',
+            'taluka' => 'Salcet',
+
         ]
 ];
 

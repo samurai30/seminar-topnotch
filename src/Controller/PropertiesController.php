@@ -42,15 +42,16 @@ class PropertiesController extends AbstractController
      * @Route("/api/properties", name="properties")
      * @param ScapePropertiesRepository $propertiesRepository
      * @param Request $request
+     * @param $query
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function properties(ScapePropertiesRepository $propertiesRepository,Request $request)
+    public function properties(ScapePropertiesRepository $propertiesRepository,Request $request,$query)
     {
         $propQuery = $propertiesRepository->createQueryBuilder('p')
             ->getQuery();
 
         $props = $this->paginator->paginate($propQuery,
-            $request->query->getInt('page',1),1);
+            $request->query->getInt('page',1),3);
 
 
         $properties = $this->render('properties/index.html.twig', [
@@ -75,11 +76,8 @@ class PropertiesController extends AbstractController
             $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
             $builderUpdater->addFilterConditions($form,$filterbuilder);
             $filterbuilder->getQuery()->getResult();
-            $props = $this->paginator->paginate($filterbuilder->getQuery(),
-                $request->query->getInt('page',1),1);
-
-            return $this->render('properties/index.html.twig',[
-                'properties' => $props
+            return $this->forward('App\Controller\PropertiesController::properties',[
+                'query' => $filterbuilder->getQuery()
             ]);
         }
         return $this->render('properties/raw.html.twig',[
@@ -95,13 +93,9 @@ class PropertiesController extends AbstractController
     public function featuredProperties(FeaturedRepository $featuredRepository,$type){
 
         $fprop = $featuredRepository->findByType($type);
-        var_dump($fprop);die;
         return $this->render('properties/raw.html.twig', [
             'properties' =>  $fprop
         ]);
-
-
-
     }
 
 
