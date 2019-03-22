@@ -10,6 +10,7 @@ use App\Repository\ScapePropertiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ class PropertiesController extends AbstractController
      * @param $query
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function properties(ScapePropertiesRepository $propertiesRepository,Request $request,$query)
+    public function properties(ScapePropertiesRepository $propertiesRepository,Request $request)
     {
         $propQuery = $propertiesRepository->createQueryBuilder('p')
             ->getQuery();
@@ -66,6 +67,7 @@ class PropertiesController extends AbstractController
      * @param Request $request
      * @param FilterBuilderUpdater $builderUpdater
      * @return Response
+     * @Security("has_role('ROLE_USER')")
      */
 
     public function FilterProperties(Request $request,FilterBuilderUpdater $builderUpdater){

@@ -14,9 +14,11 @@ security:
             provider: database_users
             form_login:
                 check_path: security_login
+                login_path: homepage
                 csrf_token_generator: security.csrf.token_manager
                 success_handler: acme.security.authentication_handler
                 failure_handler: acme.security.authentication_handler
+
 
             logout:
                 path: security_logout

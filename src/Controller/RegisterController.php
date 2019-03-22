@@ -36,9 +36,10 @@ class RegisterController extends AbstractController
      * @Route("/api/register", name="register")
      * @param UserPasswordEncoderInterface $encoder
      * @param Request $request
+     * @param \Swift_Mailer $mailer
      * @return JsonResponse
      */
-    public function register(UserPasswordEncoderInterface $encoder,Request $request)
+    public function register(UserPasswordEncoderInterface $encoder,Request $request,\Swift_Mailer $mailer)
     {
         $user = new ScapeUser();
         $address =new ScapeUserAddress();
@@ -53,6 +54,18 @@ class RegisterController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->flashBag->add('Registered', 'Registered Successfully');
+            $message = (new \Swift_Message('Test Mail'))
+                ->setFrom('suyog15122@gmail.com')
+                ->setTo('suyog566666@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                    // templates/emails/registration.html.twig
+                        'form/emailVerification.html.twig',
+                        ['users' => $user]
+                    ),
+                    'text/html'
+                );
+            $mailer->send($message);
             return $this->json('worked', Response::HTTP_ACCEPTED);
         }
 

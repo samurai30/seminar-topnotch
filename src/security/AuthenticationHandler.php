@@ -21,9 +21,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
 {
-
-
-
     /**
      * This is called when an interactive authentication attempt succeeds. This
      * is called by authentication listeners inheriting from
