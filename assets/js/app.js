@@ -12,10 +12,10 @@ const axios = require('axios/dist/axios');
 $('#registerFormContainer').on("submit",function (e) {
     e.preventDefault();
     var formData = new FormData(e.target);
+    console.log(formData);
     axios.post('/api/register', formData).then((response)=>{
        if(response.status === 200){
            $('#registerFormContainer').html(response.data.form);
-
        }else if(response.status === 202){
            $(location).attr('href','/');
        }
@@ -23,17 +23,35 @@ $('#registerFormContainer').on("submit",function (e) {
 
 });
 
-
 /*ajax register form*/
+/*ajax filter prop*/
+var mainUrl = '/api/properties';
+$('#property_filter_category_categoryName').on('change', function(e) {
+    $('#propFilterForm').submit();
+});
+$('#property_filter_featured_type').on('change', function(e) {
+    $('#propFilterForm').submit();
+});
+$('#property_filter_propName').on('keyup', function(e) {
+    $('#propFilterForm').submit();
+});
+$('#propFilterForm').on('submit',function (event) {
+    var formData = new FormData(event.target);
 
+    axios.post(mainUrl,formData).then((response)=>{
+        console.log(response);
+        $('#propertyContainer').html(response.data.property.content);
+        $('select').formSelect();
+    });
+    event.preventDefault();
+});
 
+/*ajax filter prop*/
 /*ajax properties*/
-
 $('#propertyContainer').on('click', function (e) {
     var loader = "<div class=\"progress\">\n" +
         "      <div class=\"indeterminate\"></div>\n" +
         "  </div>";
-
     let par = e.target.nodeName;
     console.log(par);
     if(par === 'I'){
@@ -42,31 +60,22 @@ $('#propertyContainer').on('click', function (e) {
         console.log(url);
         if(url && url!=='#!' && url.startsWith("/api/properties")){
             $('#loaderProperties').html(loader);
-            axios.post(url).then((response)=>{
-
-                $('#propertyContainer').html(response.data.property.content);
-                $('select').formSelect();
-            });
+            mainUrl = url;
+            $('#propFilterForm').submit();
         }
     }else if(par === 'A'){
         let url = e.target.getAttribute('href');
         if(url && url!=='#!' && url.startsWith("/api/properties")){
             $('#loaderProperties').html(loader);
-            axios.post(url).then((response)=>{
-
-                $('#propertyContainer').html(response.data.property.content);
-                $('select').formSelect();
-            });
+            mainUrl = url;
+            $('#propFilterForm').submit();
         }
     }
-
     e.preventDefault();
 });
 
 $(document).ready(function () {
-
-    axios.post('/api/properties').then((response)=>{
-        console.log(response.data.property.content);
+    axios.get('/api/properties').then((response)=>{
         $('#propertyContainer').html(response.data.property.content);
         $('select').formSelect();
     })

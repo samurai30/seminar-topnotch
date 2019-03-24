@@ -55,23 +55,34 @@ class PropertiesController extends AbstractController
         $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
 
         $form = $this->createForm(PropertyFilterType::class);
-
-        if($request->query->has($form->getName())){
-            $form->submit($request->query->get($form->getName()));
-
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
             $this->builderUpdater->addFilterConditions($form,$filterbuilder);
         }
-        $propQuery = $filterbuilder->getQuery();
-        $props = $this->paginator->paginate($propQuery,
-            $request->query->getInt('page',1),1);
+            $propQuery = $filterbuilder->getQuery();
+            $props = $this->paginator->paginate($propQuery,
+                $request->query->getInt('page',1),2);
 
-        $properties = $this->render('properties/index.html.twig',[
-            'properties' => $props,
-            'form' => $form->createView()
-        ]);
+            $properties = $this->render('properties/index.html.twig',[
+                'properties' => $props,
+            ]);
 
-        return $this->json(['property' => $properties], Response::HTTP_ACCEPTED);
+            return $this->json(['property' => $properties], Response::HTTP_ACCEPTED);
 
+
+    }
+
+    /**
+     * @Route("/test")
+     * @param Request $request
+     * @return Response
+     */
+    public function getFilterForm(Request $request){
+       $form = $this->createForm(PropertyFilterType::class);
+
+       return $this->render('form/filterPropertyForm.html.twig',[
+           'form' => $form->createView()
+       ]);
     }
 
 

@@ -2,16 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\PropertyCategory;
 use App\Entity\ScapeProperties;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use http\QueryString;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\EntityFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,9 +33,10 @@ class PropertyFilterType extends AbstractType
                     $closure = function (QueryBuilder $filterBuilder,$alias,$joinAlias,Expr $expr){
                         $filterBuilder->leftJoin($alias.'.featured',$joinAlias);
                     };
-                    $qbe->addOnce($qbe->getAlias().'.featured','opt',$closure);
+                    $qbe->addOnce($qbe->getAlias().'.featured','opt2',$closure);
                 },
             ])
+
         ;
     }
 

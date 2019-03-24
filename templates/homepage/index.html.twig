@@ -31,7 +31,11 @@
         <!-- feature discovery!-->
 
         <!-- properties!-->
-
+                <div class="section">
+                    <div class="row">
+                        {{ render(controller('App\\Controller\\PropertiesController::getFilterForm')) }}
+                    </div>
+                </div>
                 <div id="propertyContainer" class="section scrollspy">
 
                 </div>

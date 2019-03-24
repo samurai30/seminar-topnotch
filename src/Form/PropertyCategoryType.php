@@ -7,6 +7,7 @@ use App\Repository\PropertyCategoryRepository;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\EntityFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\SharedableFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,19 @@ class PropertyCategoryType extends AbstractType
             ->add('categoryName',EntityFilterType::class,[
                 'class' => PropertyCategory::class,
                 'label' => false,
-                'choice_attr' =>['placeholder' => 'Select Cat' ]
+                'choice_value' => function(PropertyCategory $category = null){
+                    return $category ? $category->getCategoryName(): '';
+                },
+                'apply_filter' => function(QueryInterface $query,$field,$values){
+                    if (empty($values['value'])){
+                        return null;
+                    }
+                    $expr = $query->getExpr();
+                    $paramName = sprintf('p_%s', str_replace('.', '_', $field));
+                    $valueName = sprintf($values['value']);
+                    return $query->createCondition( $expr->eq($field, ':'.$paramName),
+                        [$paramName => $valueName]);
+                }
             ])
         ;
     }
@@ -34,4 +47,5 @@ class PropertyCategoryType extends AbstractType
     {
         return SharedableFilterType::class;
     }
+
 }
