@@ -72,17 +72,12 @@ class PropertiesController extends AbstractController
 
     }
 
-    /**
-     * @Route("/test")
-     * @param Request $request
-     * @return Response
-     */
-    public function getFilterForm(Request $request){
-       $form = $this->createForm(PropertyFilterType::class);
+    public function getFilterForm(){
+        $form = $this->createForm(PropertyFilterType::class);
 
-       return $this->render('form/filterPropertyForm.html.twig',[
-           'form' => $form->createView()
-       ]);
+        return $this->render('form/filterPropertyForm.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
 

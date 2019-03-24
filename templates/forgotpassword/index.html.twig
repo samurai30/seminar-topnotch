@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Scape-360{% endblock %}
+
+{% block body %}
+
+<div class="container" style="min-height: 700px">
+    <h4>ENTER YOUR EMAIL</h4>
+    <h6>We will send you a mail to change your password.</h6>
+    <form action="{{ path('forgotpassword') }}" method="post">
+        <div class="input-field col s12" >
+            <input placeholder="Email Address" type="email" name="email_user_forgot" required>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn pulse">Send</button>
+        </div>
+    </form>
+    <div>
+        {% for msg in app.flashes('ForgotPassword') %}
+            <h3>{{ msg }}</h3>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

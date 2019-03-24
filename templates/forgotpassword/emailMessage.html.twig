@@ -1,0 +1,12 @@
+
+<h3>SCAPE-360</h3>
+Hi {{ users.username }}, You have requested to change your password.
+
+{# example, assuming you have a route named "login" #}
+To Change your password please visit, go to: <a href="{{ url('verifyChangePassword',{'token':token, 'id' : users.id}) }}">reset password</a>.
+
+Thanks!
+
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('build/images/Logo.f5a4542a.png')) }}">
+

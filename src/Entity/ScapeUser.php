@@ -104,6 +104,11 @@ class ScapeUser implements UserInterface,\Serializable
      */
     private $address;
 
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $token;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -271,6 +276,18 @@ class ScapeUser implements UserInterface,\Serializable
     public function setAddress(ScapeUserAddress $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

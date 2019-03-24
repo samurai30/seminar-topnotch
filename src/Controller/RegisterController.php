@@ -55,11 +55,10 @@ class RegisterController extends AbstractController
             $em->flush();
             $this->flashBag->add('Registered', 'Registered Successfully');
             $message = (new \Swift_Message('Test Mail'))
-                ->setFrom('suyog15122@gmail.com')
-                ->setTo('suyog566666@gmail.com')
+                ->setFrom('samurai3095@gmail.com')
+                ->setTo($user->getUserEmail())
                 ->setBody(
                     $this->renderView(
-                    // templates/emails/registration.html.twig
                         'form/emailVerification.html.twig',
                         ['users' => $user]
                     ),

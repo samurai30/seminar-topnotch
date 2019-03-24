@@ -66,11 +66,9 @@
 
         {% block modals %}
             <div id="loginModal" class="modal">
-                <div class="modal-content light-blue-text text-lighten-4">
-
-                    <h4>Login Form</h4>
+                <div class="modal-content light-blue-text text-lighten-2">
+                    <h4>Login</h4>
                     <hr>
-
                     <form class="col s12" action="{{ path('security_login') }}" id="formLogin">
                         <div class="row">
                             <div class="input-field col s12">
@@ -90,6 +88,9 @@
                         <div class="row right">
                             <button type="submit" id="Login" name="Login" class="btn-floating btn-large light-blue lighten-2"><i class="material-icons">arrow_forward</i></button>
                         </div>
+                        <div class="row">
+                            <a href="{{ path('forgotpassword') }}">Forgot Password?</a>
+                        </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                     </form>
@@ -101,7 +102,7 @@
                 </div>
             </div>
             <div id="registerModal" class="modal">
-                <div class="modal-content">
+                <div class="modal-content light-blue-text text-lighten-2">
                     <h4>Register Form</h4>
                     <div id="registerFormContainer">
 
