@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ScapeUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -16,6 +17,15 @@ class ScapeUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('TypeUsers',ChoiceType::class,[
+                'choices' => [
+                    'Vendor' => 'Vendor',
+                    'Customer' => 'Customer'
+                ],
+                'required' => true,
+                'mapped' => false,
+                'label' => 'Register As?'
+            ])
             ->add('userFirstName', TextType::class, [
                 'attr' => ['placeholder' => 'Enter First Name'],
                 'label' => false

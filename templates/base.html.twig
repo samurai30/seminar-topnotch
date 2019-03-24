@@ -69,6 +69,7 @@
                 <div class="modal-content light-blue-text text-lighten-2">
                     <h4>Login</h4>
                     <hr>
+
                     <form class="col s12" action="{{ path('security_login') }}" id="formLogin">
                         <div class="row">
                             <div class="input-field col s12">
@@ -101,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div id="registerModal" class="modal">
+            <div id="registerModal" class="modal bottom-sheet modal-fixed-footer">
                 <div class="modal-content light-blue-text text-lighten-2">
                     <h4>Register Form</h4>
                     <div id="registerFormContainer">
@@ -109,7 +110,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-
+                    <div class="progress" id="RegisterLogin" style="display:none;">
+                        <div class="indeterminate"></div>
+                    </div>
                 </div>
             </div>
         {% endblock %}
@@ -184,11 +187,10 @@
                     dataType:   'json',
                     async:      true,
                     success: function (data) {
-
                         $('#registerFormContainer').html(data.form)
+                        $('select').formSelect();
                     }
                 });
-
                 $('#formLogin').submit(function (event) {
                     event.preventDefault();
                     login(this,'#loginLoader');

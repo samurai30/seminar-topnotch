@@ -12,10 +12,12 @@ const axios = require('axios/dist/axios');
 $('#registerFormContainer').on("submit",function (e) {
     e.preventDefault();
     var formData = new FormData(e.target);
-    console.log(formData);
+    $('#RegisterLogin').show();
     axios.post('/api/register', formData).then((response)=>{
        if(response.status === 200){
+           $('#RegisterLogin').hide();
            $('#registerFormContainer').html(response.data.form);
+           $('select').formSelect();
        }else if(response.status === 202){
            $(location).attr('href','/');
        }
@@ -104,6 +106,7 @@ $(window).on('load', function () {
         });
         $('.modal').modal();
         $('.modal').modal({
+
             inDuration: 450,
             outDuration: 450,
             preventScrolling: true
