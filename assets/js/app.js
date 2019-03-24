@@ -34,7 +34,6 @@ $('#propertyContainer').on('click', function (e) {
         "      <div class=\"indeterminate\"></div>\n" +
         "  </div>";
 
-
     let par = e.target.nodeName;
     console.log(par);
     if(par === 'I'){
@@ -44,7 +43,9 @@ $('#propertyContainer').on('click', function (e) {
         if(url && url!=='#!' && url.startsWith("/api/properties")){
             $('#loaderProperties').html(loader);
             axios.post(url).then((response)=>{
+
                 $('#propertyContainer').html(response.data.property.content);
+                $('select').formSelect();
             });
         }
     }else if(par === 'A'){
@@ -52,7 +53,9 @@ $('#propertyContainer').on('click', function (e) {
         if(url && url!=='#!' && url.startsWith("/api/properties")){
             $('#loaderProperties').html(loader);
             axios.post(url).then((response)=>{
+
                 $('#propertyContainer').html(response.data.property.content);
+                $('select').formSelect();
             });
         }
     }
@@ -63,7 +66,9 @@ $('#propertyContainer').on('click', function (e) {
 $(document).ready(function () {
 
     axios.post('/api/properties').then((response)=>{
+        console.log(response.data.property.content);
         $('#propertyContainer').html(response.data.property.content);
+        $('select').formSelect();
     })
 });
 
@@ -95,6 +100,8 @@ $(window).on('load', function () {
         $('.sidenav').sidenav();
         $('.parallax').parallax();
         $('.scrollspy').scrollSpy();
+
+
     }, 600);
 
 

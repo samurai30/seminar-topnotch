@@ -25,79 +25,53 @@ class PropertiesController extends AbstractController
      * @var PaginatorInterface
      */
     private $paginator;
+    /**
+     * @var FilterBuilderUpdater
+     */
+    private $builderUpdater;
 
     /**
      * PropertiesController constructor.
      * @param EntityManagerInterface $manager
      * @param PaginatorInterface $paginator
+     * @param FilterBuilderUpdater $builderUpdater
      */
-    public function __construct(EntityManagerInterface $manager, PaginatorInterface $paginator)
+    public function __construct(EntityManagerInterface $manager, PaginatorInterface $paginator,FilterBuilderUpdater $builderUpdater)
     {
 
         $this->manager = $manager;
 
         $this->paginator = $paginator;
+        $this->builderUpdater = $builderUpdater;
     }
 
     /**
      * @Route("/api/properties", name="properties")
-     * @param ScapePropertiesRepository $propertiesRepository
      * @param Request $request
-     * @param $query
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function properties(ScapePropertiesRepository $propertiesRepository,Request $request)
+    public function properties(Request $request)
     {
-        $propQuery = $propertiesRepository->createQueryBuilder('p')
-            ->getQuery();
+        $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
 
+        $form = $this->createForm(PropertyFilterType::class);
+
+        if($request->query->has($form->getName())){
+            $form->submit($request->query->get($form->getName()));
+
+            $this->builderUpdater->addFilterConditions($form,$filterbuilder);
+        }
+        $propQuery = $filterbuilder->getQuery();
         $props = $this->paginator->paginate($propQuery,
-            $request->query->getInt('page',1),3);
+            $request->query->getInt('page',1),1);
 
-
-        $properties = $this->render('properties/index.html.twig', [
-            'properties' => $props
+        $properties = $this->render('properties/index.html.twig',[
+            'properties' => $props,
+            'form' => $form->createView()
         ]);
 
         return $this->json(['property' => $properties], Response::HTTP_ACCEPTED);
 
-    }
-    /**
-     * @Route("/api/FilterProperties",name="Filter_Properties")
-     * @param Request $request
-     * @param FilterBuilderUpdater $builderUpdater
-     * @return Response
-     * @Security("has_role('ROLE_USER')")
-     */
-
-    public function FilterProperties(Request $request,FilterBuilderUpdater $builderUpdater){
-
-        $form = $this->createForm(PropertyFilterType::class);
-        $form->handleRequest($request);
-        if($form->isSubmitted()&&$form->isValid()){
-            $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
-            $builderUpdater->addFilterConditions($form,$filterbuilder);
-            $filterbuilder->getQuery()->getResult();
-            return $this->forward('App\Controller\PropertiesController::properties',[
-                'query' => $filterbuilder->getQuery()
-            ]);
-        }
-        return $this->render('properties/raw.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }
-    /**
-     * @Route("/featured/{type}",name="feature_properties")
-     * @param FeaturedRepository $featuredRepository
-     * @param $type
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function featuredProperties(FeaturedRepository $featuredRepository,$type){
-
-        $fprop = $featuredRepository->findByType($type);
-        return $this->render('properties/raw.html.twig', [
-            'properties' =>  $fprop
-        ]);
     }
 
 
