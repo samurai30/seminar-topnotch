@@ -36,8 +36,11 @@ $('#property_filter_propName').on('keyup', function(e) {
     $('#propFilterForm').submit();
 });
 $('#propFilterForm').on('submit',function (event) {
+    var loader = "<div class=\"progress\">\n" +
+        "      <div class=\"indeterminate\"></div>\n" +
+        "  </div>";
     var formData = new FormData(event.target);
-
+    $('#loaderProperties').html(loader);
     axios.post(mainUrl,formData).then((response)=>{
         console.log(response);
         $('#propertyContainer').html(response.data.property.content);
