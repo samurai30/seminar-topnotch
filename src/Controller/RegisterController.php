@@ -47,10 +47,16 @@ class RegisterController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $type =$request->request->get('scape_user')['TypeUsers'];
+
             $em = $this->getDoctrine()->getManager();
             $password = $encoder->encodePassword($user,$user->getPlainPassword());
             $user->setPassword($password);
-            $user->setRoles(['ROLE_USER']);
+            if($type=='Customer'){
+                $user->setRoles(['ROLE_USER']);
+            }else if($type=='Vendor'){
+                $user->setRoles(['ROLE_VENDOR']);
+            }
             $em->persist($user);
             $em->flush();
             $this->flashBag->add('Registered', 'Registered Successfully');

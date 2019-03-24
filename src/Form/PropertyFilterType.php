@@ -36,6 +36,15 @@ class PropertyFilterType extends AbstractType
                     $qbe->addOnce($qbe->getAlias().'.featured','opt2',$closure);
                 },
             ])
+            ->add('propertyAddress', PropertyAddressFilterType::class,[
+                'add_shared' => function (FilterBuilderExecuterInterface $qbe){
+                    $closure = function (QueryBuilder $filterBuilder,$alias,$joinAlias,Expr $expr){
+                        $filterBuilder->leftJoin($alias.'.propertyAddress',$joinAlias);
+                    };
+                    $qbe->addOnce($qbe->getAlias().'.propertyAddress','opt3',$closure);
+                },
+                'label' => 'Address'
+            ])
 
         ;
     }

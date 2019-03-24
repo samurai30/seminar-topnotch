@@ -14,6 +14,7 @@ $('#registerFormContainer').on("submit",function (e) {
     var formData = new FormData(e.target);
     $('#RegisterLogin').show();
     axios.post('/api/register', formData).then((response)=>{
+        console.log(response.data);
        if(response.status === 200){
            $('#RegisterLogin').hide();
            $('#registerFormContainer').html(response.data.form);
@@ -29,12 +30,19 @@ $('#registerFormContainer').on("submit",function (e) {
 /*ajax filter prop*/
 var mainUrl = '/api/properties';
 $('#property_filter_category_categoryName').on('change', function(e) {
+    mainUrl = '/api/properties';
     $('#propFilterForm').submit();
 });
 $('#property_filter_featured_type').on('change', function(e) {
+    mainUrl = '/api/properties';
     $('#propFilterForm').submit();
 });
 $('#property_filter_propName').on('keyup', function(e) {
+    mainUrl = '/api/properties';
+    $('#propFilterForm').submit();
+});
+$('#property_filter_propertyAddress_propCity').on('change', function(e) {
+    mainUrl = '/api/properties';
     $('#propFilterForm').submit();
 });
 $('#propFilterForm').on('submit',function (event) {
