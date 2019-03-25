@@ -19,7 +19,7 @@ class PropertyAddressFilterType extends AbstractType
                 'class' => PropertyAddress::class,
                 'label' => false,
                 'choice_value' => function(PropertyAddress $featured = null){
-                    return $featured ? $featured->getPropCity(): '';
+                    return $featured ? $featured->getPropCity() : '';
                 },
                 'apply_filter' => function(QueryInterface $query,$field,$values){
                     if (empty($values['value'])){
@@ -27,10 +27,12 @@ class PropertyAddressFilterType extends AbstractType
                     }
                     $expr = $query->getExpr();
                     $paramName = sprintf('p_%s', str_replace('.', '_', $field));
-                    $valueName = sprintf($values['value']);
+                    $valueSelected = sprintf($values['value']);
+                  ;
                     return $query->createCondition( $expr->eq($field, ':'.$paramName),
-                        [$paramName => $valueName]);
-                }
+                        [$paramName => $valueSelected ]);
+                },
+
             ]);
     }
 
