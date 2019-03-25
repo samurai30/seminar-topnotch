@@ -28,6 +28,7 @@ class PropertyAddress
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @var string
      */
     private $propCity;
 
@@ -93,8 +94,9 @@ class PropertyAddress
 
         return $this;
     }
-    public function __toString() {
-        return $this->propCity;
+    public function __toString()
+    {
+      return $this->propCity;
     }
 
 }

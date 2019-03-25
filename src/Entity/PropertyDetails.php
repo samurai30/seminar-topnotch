@@ -26,6 +26,11 @@ class PropertyDetails
      */
     private $propBHK;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ScapeProperties", mappedBy="propDetails", cascade={"persist", "remove"})
+     */
+    private $scapeProperty;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,23 @@ class PropertyDetails
     public function setPropBHK(string $propBHK): self
     {
         $this->propBHK = $propBHK;
+
+        return $this;
+    }
+
+    public function getScapeProperty(): ?ScapeProperties
+    {
+        return $this->scapeProperty;
+    }
+
+    public function setScapeProperty(ScapeProperties $scapeProperty): self
+    {
+        $this->scapeProperty = $scapeProperty;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $scapeProperty->getPropDetails()) {
+            $scapeProperty->setPropDetails($this);
+        }
 
         return $this;
     }

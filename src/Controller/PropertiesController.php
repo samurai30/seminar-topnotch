@@ -61,7 +61,7 @@ class PropertiesController extends AbstractController
         }
             $propQuery = $filterbuilder->getQuery();
             $props = $this->paginator->paginate($propQuery,
-                $request->query->getInt('page',1),2);
+                $request->query->getInt('page',1),3);
 
             $properties = $this->render('properties/index.html.twig',[
                 'properties' => $props,

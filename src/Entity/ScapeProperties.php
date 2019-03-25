@@ -49,6 +49,12 @@ class ScapeProperties
      */
     private $featured;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PropertyDetails", inversedBy="scapeProperty", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $propDetails;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +128,18 @@ class ScapeProperties
     public function setFeatured(?Featured $featured): self
     {
         $this->featured = $featured;
+
+        return $this;
+    }
+
+    public function getPropDetails(): ?PropertyDetails
+    {
+        return $this->propDetails;
+    }
+
+    public function setPropDetails(PropertyDetails $propDetails): self
+    {
+        $this->propDetails = $propDetails;
 
         return $this;
     }

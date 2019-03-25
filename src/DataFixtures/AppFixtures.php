@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Featured;
 use App\Entity\PropertyAddress;
 use App\Entity\PropertyCategory;
+use App\Entity\PropertyDetails;
 use App\Entity\ScapeProperties;
 use App\Entity\ScapeUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,6 +23,8 @@ class AppFixtures extends Fixture
             'city' => 'porvorim',
             'district' => 'North',
             'taluka' => 'Salcet',
+            'price' => 5580000,
+            'bhk' => 3
 
         ],
         [
@@ -31,6 +34,8 @@ class AppFixtures extends Fixture
             'city' => 'Mapusa',
             'district' => 'North',
             'taluka' => 'Bardez',
+            'price' => 4200000,
+            'bhk' => 3
 
         ],
         [
@@ -40,6 +45,8 @@ class AppFixtures extends Fixture
             'city' => 'Aldona',
             'district' => 'North',
             'taluka' => 'Bardez',
+            'price' => 2600000,
+            'bhk' => 1
 
         ],
         [
@@ -49,6 +56,8 @@ class AppFixtures extends Fixture
             'city' => 'Colvale',
             'district' => 'North',
             'taluka' => 'Bardez',
+            'price' => 7500000,
+            'bhk' => 4
 
         ],
         [
@@ -58,6 +67,8 @@ class AppFixtures extends Fixture
             'city' => 'Mapusa',
             'district' => 'North',
             'taluka' => 'Bardez',
+            'price' => 3600000,
+            'bhk' => 2
 
         ],
         [
@@ -67,12 +78,15 @@ class AppFixtures extends Fixture
             'city' => 'Margao',
             'district' => 'South',
             'taluka' => 'Salcet',
+            'price' => 4500000,
+            'bhk' => 4
 
         ]
 ];
 
     private const categories = ['Duplex','Triplex','Quadplex'];
     private const featuredData = ['Daily','Exclusive','weekly'];
+
 
     /**
      * @var UserPasswordEncoderInterface
@@ -113,6 +127,10 @@ class AppFixtures extends Fixture
             $propAddress->setPropCity($prop['city']);
             $propAddress->setPropDistrict($prop['district']);
             $propAddress->setPropTaluka($prop['taluka']);
+            $propDetails = new PropertyDetails();
+            $propDetails->setPropPrice($prop['price']);
+            $propDetails->setPropBHK($prop['bhk']);
+            $property->setPropDetails($propDetails);
             $property->setCategory($this->getReference(self::categories[rand(0, count(self::categories)-1)]));
             $property->setFeatured($this->getReference(self::featuredData[rand(0, count(self::featuredData)-1)]));
             $property->setPropertyAddress($propAddress);
@@ -130,4 +148,5 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
     }
+
 }
