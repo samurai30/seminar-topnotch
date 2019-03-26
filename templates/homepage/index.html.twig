@@ -2,22 +2,19 @@
 
 {% block body %}
           <!-- header!-->
-            <div class="parallax-container center valign-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 white-text">
-                              <img class="responsive-img" src="{{ asset('build/images/Logo.f5a4542a.png') }}" alt="Logo">
-                        </div>
-                        <div class="col s12">
-                            <a href="#propertySection" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');"></a>
-                        </div>
-                    </div>
+
+    <header class="white-text">
+        <div class="container center valign-wrapper">
+            <div class="row">
+                <div class="col s12 white-text">
+                    <img class="responsive-img" src="{{ asset('build/images/Logo.f5a4542a.png') }}" alt="Logo">
                 </div>
-
-                <div class="parallax"><img class="responsive-img" src="{{ asset('build/images/MainPageBack2.8886b5e7.png') }}" alt=""></div>
-                <div class="parallax"><img class="responsive-img" src="{{ asset('build/images/MainPageBack.23a3055d.png') }}" alt=""></div>
-
+                <div class="col s12">
+                    <a href="#propertySection" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');"></a>
+                </div>
             </div>
+        </div>
+    </header>
          <!-- header!-->
         <!--!-->
         <!-- feature discovery!-->
@@ -33,9 +30,8 @@
         <!-- properties!-->
                <div class="container section scrollspy" id="propertySection">
                            {{ render(controller('App\\Controller\\PropertiesController::getFilterForm')) }}
-
                </div>
-                <div id="propertyContainer" class="">
+                <div id="propertyContainer">
 
                 </div>
         <!-- properties!-->

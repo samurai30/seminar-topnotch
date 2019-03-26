@@ -1,16 +1,10 @@
 @import "~materialize-css/dist/css/materialize.css";
-body{
-    background: whitesmoke;
-}
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
 }
 .modal { max-height: 100%;}
-#navBar{
-    background: rgba(0,0,0,0.3);
-    box-shadow: none;
-}
+
 #logo{
     height: auto;
     max-width: 20%;
