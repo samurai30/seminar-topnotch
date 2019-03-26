@@ -29,7 +29,6 @@ class PropertyAddressRepository extends ServiceEntityRepository
         $cityArray = [];
          foreach ($results as $result){
             $cityArray += [$result['propCity'] => $result['propCity']];
-
         }
         return $cityArray;
     }

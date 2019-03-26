@@ -49,7 +49,6 @@ class RegisterController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $type =$request->request->get('scape_user')['TypeUsers'];
-
             $em = $this->getDoctrine()->getManager();
             $password = $encoder->encodePassword($user,$user->getPlainPassword());
             $user->setPassword($password);

@@ -19,6 +19,20 @@ class PropertyCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, PropertyCategory::class);
     }
 
+    public function getDistinctCat(){
+        $results = $this->createQueryBuilder('cat')
+            ->select('DISTINCT cat.categoryName')
+            ->getQuery()
+            ->getResult();
+        $catArray = [];
+
+        foreach ($results as $result){
+            $catArray += [$result['categoryName'] => $result['categoryName']];
+        }
+
+        return $catArray;
+    }
+
     // /**
     //  * @return PropertyCategory[] Returns an array of PropertyCategory objects
     //  */

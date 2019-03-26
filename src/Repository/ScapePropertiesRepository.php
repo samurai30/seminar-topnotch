@@ -19,6 +19,8 @@ class ScapePropertiesRepository extends ServiceEntityRepository
         parent::__construct($registry, ScapeProperties::class);
     }
 
+
+
     // /**
     //  * @return ScapeProperties[] Returns an array of ScapeProperties objects
     //  */

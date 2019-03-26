@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,7 +47,7 @@ class ScapeProperties
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Featured", inversedBy="scapeProperty")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $featured;
 
@@ -54,6 +56,22 @@ class ScapeProperties
      * @ORM\JoinColumn(nullable=false)
      */
     private $propDetails;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ScapeUser", inversedBy="properties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $scapeUser;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PropertyImages", mappedBy="property", orphanRemoval=true)
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +158,49 @@ class ScapeProperties
     public function setPropDetails(PropertyDetails $propDetails): self
     {
         $this->propDetails = $propDetails;
+
+        return $this;
+    }
+
+    public function getScapeUser(): ?ScapeUser
+    {
+        return $this->scapeUser;
+    }
+
+    public function setScapeUser(?ScapeUser $scapeUser): self
+    {
+        $this->scapeUser = $scapeUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PropertyImages[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(PropertyImages $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(PropertyImages $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProperty() === $this) {
+                $image->setProperty(null);
+            }
+        }
 
         return $this;
     }

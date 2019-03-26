@@ -18,7 +18,15 @@ class FeaturedRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Featured::class);
     }
-
+    public function getFeatured($value){
+        return $this->createQueryBuilder('c')
+            ->select('c, cc')
+            ->leftJoin('c.scapeProperty', 'cc')
+            ->where('c.type = :val')
+            ->setParameter('val',$value)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Featured[] Returns an array of Featured objects
     //  */

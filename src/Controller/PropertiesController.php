@@ -53,7 +53,11 @@ class PropertiesController extends AbstractController
      */
     public function properties(Request $request)
     {
-        $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e');
+        $filterbuilder = $this->getDoctrine()->getRepository(ScapeProperties::class)->createQueryBuilder('e')
+        ->select('e')
+            ->where('e.propStatus = :val')
+            ->setParameter('val', 'available');
+
 
         $form = $this->createForm(PropertyFilterType::class);
         $form->handleRequest($request);
@@ -79,6 +83,18 @@ class PropertiesController extends AbstractController
         return $this->render('form/filterPropertyForm.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    public function getFeaturedProp(){
+
+        $properties = $this->getDoctrine()->getRepository(ScapePropertiesRepository::class);
+
+
+        return $this->render('homepage/featured.html.twig',
+            [
+
+               'properties' => $properties
+            ]);
     }
 
 

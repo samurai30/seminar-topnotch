@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -113,6 +115,21 @@ class ScapeUser implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=15)
      */
     private $verified;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ScapeProperties", mappedBy="scapeUser")
+     */
+    private $properties;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $profilePicPath;
+
+    public function __construct()
+    {
+        $this->properties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -305,6 +322,49 @@ class ScapeUser implements UserInterface,\Serializable
     public function setVerified(string $verified): self
     {
         $this->verified = $verified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ScapeProperties[]
+     */
+    public function getProperties(): Collection
+    {
+        return $this->properties;
+    }
+
+    public function addProperty(ScapeProperties $property): self
+    {
+        if (!$this->properties->contains($property)) {
+            $this->properties[] = $property;
+            $property->setScapeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProperty(ScapeProperties $property): self
+    {
+        if ($this->properties->contains($property)) {
+            $this->properties->removeElement($property);
+            // set the owning side to null (unless already changed)
+            if ($property->getScapeUser() === $this) {
+                $property->setScapeUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfilePicPath(): ?string
+    {
+        return $this->profilePicPath;
+    }
+
+    public function setProfilePicPath(?string $profilePicPath): self
+    {
+        $this->profilePicPath = $profilePicPath;
 
         return $this;
     }

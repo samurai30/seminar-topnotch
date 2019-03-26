@@ -1,48 +1,60 @@
 <div class="row" id="properties">
     <div class="center">
-        <nav>
+        <nav class="cyan darken-4">
             <h3>Properties</h3>
         </nav>
     </div>
-{% for props in properties %}
-<div class="col m6 l4 s12">
-    <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{ asset('build/images/MainPageBack.23a3055d.png') }}" alt="Property Image">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">view property</a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">close</i></span>
-            <div class="m12 l12 s12">
-                <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
-                    <thead>
-                    <tr>
-                        <th>CITY</th>
-                        <th>NOTES</th>
-                        <th>STATUS</th>
-                    </tr>
+{% if properties is empty %}
+    <h3>Sorry No Properties Found.</h3>
+    {% else %}
+        {% for props in properties %}
+            <div class="col m6 l4 s12">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <div class="carousel carousel-slider">
+                            {% for image in props.images %}
+                                <a class="carousel-item" href="#{{ image.id }}!"><img class="activator" src="{{ asset(prop_images_path ~ props.scapeUser.username ~'/'~ props.category.categoryName~'/'~ props.propName~'/'~image.imagePath) }}" alt="{{ props.propName }}"></a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">view property</a></p>
+                        <div class="chip">
+                            {{ props.propDetails.propPrice }}
+                        </div>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">close</i></span>
+                        <div class="m12 l12 s12">
+                            <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
+                                <thead>
+                                <tr>
+                                    <th>CITY</th>
+                                    <th>NOTES</th>
+                                    <th>STATUS</th>
+                                </tr>
 
-                    </thead>
-                    <tbody>
-                    <tr>
+                                </thead>
+                                <tbody>
+                                <tr>
 
-                        <td>{{ props.propertyAddress.propCity  }}</td>
-                        <td>{{ props.propNotes }}</td>
-                        <td>{{ props.propStatus }}</td>
-                    </tr>
-                    </tbody>
+                                    <td>{{ props.propertyAddress.propCity  }}</td>
+                                    <td>{{ props.propNotes }}</td>
+                                    <td>{{ props.propStatus }}</td>
+                                </tr>
+                                </tbody>
 
-                </table>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
-        </div>
-    </div>
+        {% endfor %}
 
-</div>
-{% endfor %}
+    {% endif %}
 </div>
 <div class="row">
     <div id="loaderProperties"></div>

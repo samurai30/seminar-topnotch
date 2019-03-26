@@ -66,6 +66,8 @@ $('#propFilterForm').on('submit',function (event) {
         console.log(response);
         $('#propertyContainer').html(response.data.property.content);
         $('select').formSelect();
+        $('.carousel.carousel-slider').carousel();
+        $('.card').css({'zIndex':0})
     });
     event.preventDefault();
 });
@@ -102,6 +104,8 @@ $(document).ready(function () {
     axios.get('/api/properties').then((response)=>{
         $('#propertyContainer').html(response.data.property.content);
         $('select').formSelect();
+        $('.carousel.carousel-slider').carousel();
+        $('.card').css({'zIndex':0})
     })
 });
 
@@ -135,7 +139,13 @@ $(window).on('load', function () {
         $('.parallax').parallax();
         $('.scrollspy').scrollSpy();
         $('.scrollspy').scrollSpy({
-            scrollOffset: 50
+            scrollOffset: 40
+        });
+        $('select').formSelect();
+        $('.slider').slider();
+        $('.slider').slider({
+            interval: 3000,
+            height: 600
         });
 
     }, 600);
@@ -145,6 +155,7 @@ $(window).on('load', function () {
 /* pre loading */
 
 var header = $('header');
+
 var range = 200;
 
 $(window).on('scroll', function () {
@@ -158,8 +169,11 @@ $(window).on('scroll', function () {
 
     if (calc > '1') {
         header.css({ 'opacity': 1 });
+
     } else if ( calc < '0' ) {
+
         header.css({ 'opacity': 0 });
+
     }
 
 });

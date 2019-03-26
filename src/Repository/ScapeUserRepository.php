@@ -19,6 +19,8 @@ class ScapeUserRepository extends ServiceEntityRepository
         parent::__construct($registry, ScapeUser::class);
     }
 
+
+
     // /**
     //  * @return ScapeUser[] Returns an array of ScapeUser objects
     //  */

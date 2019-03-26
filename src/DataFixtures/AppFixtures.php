@@ -105,7 +105,7 @@ class AppFixtures extends Fixture
 
         $this->loadCat($manager);
         $this->loadFeatured($manager);
-        $this->loadProp($manager);
+
     }
     private function loadCat(ObjectManager $manager) {
 
