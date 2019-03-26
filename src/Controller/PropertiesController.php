@@ -85,15 +85,19 @@ class PropertiesController extends AbstractController
         ]);
     }
 
-    public function getFeaturedProp(){
+    /**
+     * @Route("/test")
+     * @param FeaturedRepository $repository
+     * @return Response
+     */
+    public function getFeaturedProp(FeaturedRepository $repository)
+    {
 
-        $properties = $this->getDoctrine()->getRepository(ScapePropertiesRepository::class);
-
+        $properties = $repository->getFeatured('Daily');
 
         return $this->render('homepage/featured.html.twig',
             [
-
-               'properties' => $properties
+                'properties' => $properties
             ]);
     }
 

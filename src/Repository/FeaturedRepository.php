@@ -23,7 +23,9 @@ class FeaturedRepository extends ServiceEntityRepository
             ->select('c, cc')
             ->leftJoin('c.scapeProperty', 'cc')
             ->where('c.type = :val')
+            ->andWhere( 'cc.propStatus = :val2')
             ->setParameter('val',$value)
+            ->setParameter('val2','available')
             ->getQuery()
             ->getResult();
     }

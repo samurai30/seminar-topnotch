@@ -1,26 +1,36 @@
-<div class="row" id="form-filter">
-    {{ form_start(form,{'attr': {'id': 'propFilterForm'},'method': 'GET'}) }}
-    <div class="input-field col m2 s3">
-        {{ form_label(form.propName) }}
-        {{ form_widget(form.propName) }}
-    </div>
-    <div class="input-field col m2 s3">
-        {{ form_widget(form.featured) }}
-        {{ form_label(form.featured) }}
-    </div>
-    <div class="input-field col m2 s3">
-        {{ form_widget(form.category) }}
-        {{ form_label(form.category) }}
-    </div>
-    <div class="input-field col m2 s3">
-        {{ form_row(form.propertyAddress.propCity) }}
-    </div>
-    <div class="input-field col m2 s3">
-        {{ form_row(form.propertyAddress.propDistrict) }}
+
+    <div class="row">
+        {{ form_start(form,{'attr': {'id': 'propFilterForm','class': 'col m5'},'method': 'GET'}) }}
+        <div class="row">
+            <div class="input-field center col m2 s3 offset-m5 offset-s5">
+                {{ form_label(form.propName) }}
+                {{ form_widget(form.propName) }}
+            </div>
+            <div class="input-field col m2 s3">
+                {{ form_widget(form.featured) }}
+                {{ form_label(form.featured) }}
+            </div>
+            <div class="input-field col m2 s3">
+                {{ form_widget(form.category) }}
+                {{ form_label(form.category) }}
+            </div>
+
+        </div>
+        <div class="row">
+
+                <div class="input-field col m2 s3 offset-m5 offset-s5">
+                    {{ form_row(form.propertyAddress.propCity) }}
+                </div>
+                <div class="input-field col m2 s3">
+                    {{ form_row(form.propertyAddress.propDistrict) }}
+                </div>
+
+                <div class="input-field col m2 s3">
+                    {{ form_row(form.propDetails.propBHK) }}
+                </div>
+
+        </div>
+
+        {{ form_end(form) }}
     </div>
 
-    <div class="input-field col m2 s3">
-        {{ form_row(form.propDetails.propBHK) }}
-    </div>
-    {{ form_end(form) }}
-</div>

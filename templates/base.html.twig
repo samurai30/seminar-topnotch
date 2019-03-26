@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col s12">
                             <a href="{{ path('homepage') }}" class="brand-logo left"><img src="{{ asset('build/images/Logo.f9a8d821.png') }}" alt="logo" id="logo"></a>
-                            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
                             <ul class="right hide-on-med-and-down">
                                 {% if is_granted('ROLE_USER') %}
                                     <li>Welcome: {{ app.user.username }}</li>
@@ -48,6 +48,7 @@
                                     <li><a class="modal-trigger" href="#registerModal" data-target="registerModal"><i class="material-icons">person_add</i></a></li>
                                 {% endif %}
                             </ul>
+                            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                             <div class="background cyan">
 
                             </div>
-                            <a href="#"><img class="circle" src="{{ asset('build/images/Logo.f9a8d821.png') }}" alt="UserImage"></a>
+                            <a href="#"><img class="circle" src="{{ asset('build/images/defaultFeatured.7cd7bcf2.jpg') }}" alt="UserImage"></a>
 
                             <a href="#"><span class="white-text name">{{ app.user.username }}</span></a>
                             <a href="#"><span class="white-text email">{{ app.user.userEmail }}</span></a>
@@ -73,6 +74,7 @@
                 {% endif %}
             </ul>
 
+
             <div id='nav-bg'></div>
             <!-- new nav!-->
         {% endblock %}
@@ -82,41 +84,44 @@
 
         {% block modals %}
             <div id="loginModal" class="modal">
-                <div class="modal-content light-blue-text text-lighten-2">
-                    <h4>Login</h4>
-                    <hr>
+                <div class="modal-content">
+                    <div class="valign-wrapper row login-box">
+                        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+                            <form action="{{ path('security_login') }}" id="formLogin">
+                                <div class="card-content">
+                                    <span class="card-title">Login</span>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input placeholder="Username" id="username" name="_username" type="text" required="required" class="validate">
+                                            <label for="first_name">Username</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input placeholder="password" name="_password" type="password" class="validate" required="required">
+                                            <label for="password">Password</label>
+                                        </div>
+                                       <div class="center-align">
+                                           <div id="errorMessageLogin" class="red-text text-darken-1">
 
-                    <form class="col s12" action="{{ path('security_login') }}" id="formLogin">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input placeholder="Username" id="username" name="_username" type="text" required="required" class="validate">
-                                <label for="first_name">Username</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input placeholder="password" name="_password" type="password" class="validate" required="required">
-                                <label for="password">Password</label>
-                            </div>
-                        </div>
-                        <div class="row center">
-                            <div id="errorMessageLogin" class="red-text text-darken-1">
-
+                                           </div>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="card-action right-align">
+                                    <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
+                                    <input type="submit" id="Login" name="Login" class="btn green waves-effect waves-light" value="Login">
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </form>
+                            <div class="progress" id="loginLoader" style="display:none;">
+                                <div class="indeterminate"></div>
                             </div>
                         </div>
-                        <div class="row right">
-                            <button type="submit" id="Login" name="Login" class="btn-floating btn-large light-blue lighten-2"><i class="material-icons">arrow_forward</i></button>
-                        </div>
-                        <div class="row">
-                            <a href="{{ path('forgotpassword') }}">Forgot Password?</a>
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="progress" id="loginLoader" style="display:none;">
-                        <div class="indeterminate"></div>
                     </div>
+
+
+
                 </div>
+
             </div>
             <div id="registerModal" class="modal bottom-sheet modal-fixed-footer">
                 <div class="modal-content light-blue-text text-lighten-2">

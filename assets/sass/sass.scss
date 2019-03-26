@@ -6,10 +6,29 @@ header {z-index: 2;}
 body {
   background: #eee;
 }
+
+
+.slides li img {
+  background-attachment: fixed;
+  opacity: 0.4;
+
+}
+.slides li{
+  background-color: black;
+}
+
+#loginModal{
+  background: transparent;
+  box-shadow: none;
+}
+
 #navbar {
-  font-family: 'Bungee';
+
   position: fixed;
   top: 0;
+}
+#sider-home{
+  font-family: 'Bungee';
 }
 header {
   position: relative;

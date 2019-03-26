@@ -16,7 +16,9 @@
         </div>
 
     </header>
-
+     <div>
+         {{ render(controller('App\\Controller\\PropertiesController::getFeaturedProp')) }}
+     </div>
          <!-- header!-->
 
         <!--!-->
@@ -31,7 +33,7 @@
         <!-- feature discovery!-->
 
         <!-- properties!-->
-               <div class="container section scrollspy" id="propertySection">
+               <div class="section scrollspy center-align" id="propertySection">
                            {{ render(controller('App\\Controller\\PropertiesController::getFilterForm')) }}
                </div>
                 <div id="propertyContainer">
