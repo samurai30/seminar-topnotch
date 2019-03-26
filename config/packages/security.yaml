@@ -18,11 +18,13 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 success_handler: acme.security.authentication_handler
                 failure_handler: acme.security.authentication_handler
-
+                default_target_path: login_redirect
 
             logout:
                 path: security_logout
                 target: homepage
+            security: true
+
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     # Easy way to control access for large sections of your site
