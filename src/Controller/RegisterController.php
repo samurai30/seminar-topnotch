@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\ScapeUser;
 use App\Entity\ScapeUserAddress;
 use App\Form\ScapeUserType;
+use App\Repository\ScapeUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,9 @@ class RegisterController extends AbstractController
             }else if($type=='Vendor'){
                 $user->setRoles(['ROLE_VENDOR']);
             }
+            $user->setVerified('unverified');
+            $token = md5(uniqid($user->getUsername(), true));
+            $user->setToken($token);
             $em->persist($user);
             $em->flush();
             $this->flashBag->add('Registered', 'Registered Successfully');
@@ -66,7 +70,8 @@ class RegisterController extends AbstractController
                 ->setBody(
                     $this->renderView(
                         'form/emailVerification.html.twig',
-                        ['users' => $user]
+                        ['users' => $user,
+                            'token' => $token]
                     ),
                     'text/html'
                 );
@@ -84,6 +89,36 @@ class RegisterController extends AbstractController
         ]);
 
         return $this->json(['form' => $formData], Response::HTTP_OK,[],[]);
+
+    }
+
+    /**
+     * @Route("/verify/{token}/{id}",name="verifyUser")
+     * @param $token
+     * @param $id
+     * @return Response
+     */
+    public function VerifyUsers($token,$id){
+
+        $user = $this->getDoctrine()->getRepository(ScapeUser::class)->find($id);
+
+        if($user){
+            if($token == $user->getToken()){
+                $user->setVerified('verified');
+                $user->setToken('');
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                return $this->render('VerifyUser/index.html.twig',[
+                    'status' => 'success',
+                ]);
+            }
+        }
+        else{
+            return $this->render('VerifyUser/index.html.twig',[
+                'status' => 'failed',
+            ]);
+        }
 
     }
 

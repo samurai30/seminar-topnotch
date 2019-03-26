@@ -2,7 +2,7 @@
 <h3>SCAPE-360</h3>
 Hi {{ users.username }}! You're successfully registered.
 {# example, assuming you have a route named "login" #}
-To Verify, go to: <a href="{{ url('homepage') }}">...</a>.
+To Verify, go to: <a href="{{ url('verifyUser',{'token':token, 'id' : users.id}) }}">Verify Email</a>.
 
 Thanks!
 

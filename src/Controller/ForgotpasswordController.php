@@ -89,6 +89,7 @@ class ForgotpasswordController extends AbstractController
             if($token == $user->getToken()){
                 $password = $encoder->encodePassword($user,$user->getPlainPassword());
                 $user->setPassword($password);
+                $user->setToken('');
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();

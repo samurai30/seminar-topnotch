@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    {% if status == 'success' %}
+        <div class="container">
+            <h2>Successfully Verified</h2>
+        </div>
+    {% elseif status == 'failed' %}
+        <div class="container">
+            <h2>Something went wrong</h2>
+        </div>
+    {%  endif %}
+
+{% endblock %}

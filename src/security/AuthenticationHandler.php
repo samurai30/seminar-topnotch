@@ -8,16 +8,13 @@
 
 namespace App\security;
 
-
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Entity\ScapeUser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
 {
@@ -32,8 +29,9 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
+
             if($request->isXmlHttpRequest()){
-                $array = array( 'success' => true ); // data to return via JSON
+                $array = array( 'success' => true);
                 $response = new Response( json_encode( $array ) );
                 $response->headers->set( 'Content-Type', 'application/json' );
                 return $response;

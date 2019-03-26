@@ -23,7 +23,10 @@
                         <a href="{{ path('homepage') }}" class="brand-logo left"><img src="{{ asset('build/images/Logo.f5a4542a.png') }}" alt="logo" id="logo"></a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             {% if is_granted('ROLE_USER') %}
-                                <li>User: {{ app.user.username }}</li>
+                                <li>Welcome: {{ app.user.username }}</li>
+                                {% if is_granted('ROLE_VENDOR') %}
+                                    <li><a href="#">Vendor Portal</a></li>
+                                    {% endif %}
                                 <li><a class="modal-trigger" href="{{ path('security_logout') }}">Logout</a></li>
                             {% else %}
                             <li><a class="modal-trigger" href="#loginModal" data-target="loginModal">Login</a></li>
@@ -166,6 +169,19 @@
                             $('#loginLoader').hide();
                         },600);
                         if(data.success === true){
+
+                            /*$.ajax({
+                               type: "post",
+                               url: "",
+                                async:true,
+                                dataType: 'json',
+                                success: function (data) {
+                                    let role = data.toString();
+                                    if(role === 'ROLE_USER'){
+
+                                    }
+                                }
+                            });*/
                             $(location).attr('href','{{ path('homepage') }}')
                         }else{
                             if(data.message === 'Bad credentials.'){

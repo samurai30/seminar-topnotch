@@ -109,6 +109,11 @@ class ScapeUser implements UserInterface,\Serializable
      */
     private $token;
 
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $verified;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -288,6 +293,18 @@ class ScapeUser implements UserInterface,\Serializable
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getVerified(): ?string
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(string $verified): self
+    {
+        $this->verified = $verified;
 
         return $this;
     }
