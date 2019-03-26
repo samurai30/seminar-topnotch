@@ -19,6 +19,22 @@ class PropertyDetailsRepository extends ServiceEntityRepository
         parent::__construct($registry, PropertyDetails::class);
     }
 
+
+    public function getDistinctBHK(){
+
+        $results = $this->createQueryBuilder('bhk')
+            ->select('DISTINCT bhk.propBHK')
+            ->getQuery()
+            ->getResult();
+
+        $propBHKArray = [];
+        foreach ($results as $result){
+            $propBHKArray += [$result['propBHK']."-BHK" => $result['propBHK']];
+        }
+        return $propBHKArray;
+    }
+
+
     // /**
     //  * @return PropertyDetails[] Returns an array of PropertyDetails objects
     //  */

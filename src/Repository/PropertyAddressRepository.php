@@ -19,6 +19,34 @@ class PropertyAddressRepository extends ServiceEntityRepository
         parent::__construct($registry, PropertyAddress::class);
     }
 
+    public function getDistinctCity(){
+
+        $results = $this->createQueryBuilder('city')
+            ->select('DISTINCT city.propCity')
+            ->getQuery()
+            ->getResult();
+
+        $cityArray = [];
+         foreach ($results as $result){
+            $cityArray += [$result['propCity'] => $result['propCity']];
+
+        }
+        return $cityArray;
+    }
+
+    public function getDistinctDistrict(){
+        $results = $this->createQueryBuilder('district')
+            ->select('DISTINCT district.propDistrict')
+            ->getQuery()
+            ->getResult();
+
+        $propDistrictArray = [];
+        foreach ($results as $result){
+            $propDistrictArray += [$result['propDistrict'] => $result['propDistrict']];
+
+        }
+        return $propDistrictArray;
+    }
     // /**
     //  * @return PropertyAddress[] Returns an array of PropertyAddress objects
     //  */

@@ -6,6 +6,7 @@ use App\Entity\Featured;
 use App\Entity\ScapeProperties;
 use App\Form\PropertyFilterType;
 use App\Repository\FeaturedRepository;
+use App\Repository\PropertyAddressRepository;
 use App\Repository\ScapePropertiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -79,6 +80,8 @@ class PropertiesController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
 
 
 }

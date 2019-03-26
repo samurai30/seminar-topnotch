@@ -45,12 +45,23 @@ $('#property_filter_propertyAddress_propCity').on('change', function(e) {
     mainUrl = '/api/properties';
     $('#propFilterForm').submit();
 });
+$('#property_filter_propertyAddress_propDistrict').on('change', function(e) {
+    mainUrl = '/api/properties';
+    $('#propFilterForm').submit();
+});
+$('#property_filter_propDetails_propBHK').on('change', function(e) {
+    mainUrl = '/api/properties';
+    $('#propFilterForm').submit();
+});
 $('#propFilterForm').on('submit',function (event) {
+
     var loader = "<div class=\"progress\">\n" +
         "      <div class=\"indeterminate\"></div>\n" +
         "  </div>";
+
     var formData = new FormData(event.target);
     $('#loaderProperties').html(loader);
+
     axios.post(mainUrl,formData).then((response)=>{
         console.log(response);
         $('#propertyContainer').html(response.data.property.content);

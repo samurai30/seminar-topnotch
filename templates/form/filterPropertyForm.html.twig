@@ -13,9 +13,14 @@
         {{ form_label(form.category) }}
     </div>
     <div class="input-field col m2 s3">
-        {{ form_widget(form.propertyAddress) }}
-        {{ form_label(form.propertyAddress) }}
+        {{ form_row(form.propertyAddress.propCity) }}
+    </div>
+    <div class="input-field col m2 s3">
+        {{ form_row(form.propertyAddress.propDistrict) }}
     </div>
 
+    <div class="input-field col m2 s3">
+        {{ form_row(form.propDetails.propBHK) }}
+    </div>
     {{ form_end(form) }}
 </div>
