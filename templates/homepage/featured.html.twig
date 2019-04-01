@@ -1,40 +1,39 @@
 
 <div class="slider" id="sider-home">
     <ul class="slides">
+        {% if properties|length == 0 %}
+
+        <li>
+            <img src="{{ asset('build/images/defaultFeatured.7cd7bcf2.jpg') }}">
+            <div class="caption left-align">
+                <h3>Featured Property</h3>
+                <h5 class="light cyan-text text-lighten-1">We don't have any Properties Featured yet.</h5>
+            </div>
+        </li>
+
+
+        {% else %}
         {% for prop in properties %}
-            {{ prop.scapeProperty|length }}
-            {% if prop.scapeProperty|length == 0 %}
+
+            {%  set imageP = ""%}
+            {% for scapeProp in prop.scapeProperty %}
+                {% for image in scapeProp.images %}
+                    {%  set imageP =  image.imagePath  %}
+
+                {% endfor %}
                 <li>
-                    <img src="{{ asset('build/images/defaultFeatured.7cd7bcf2.jpg') }}">
+                    <img src="{{ asset(prop_images_path ~ scapeProp.scapeUser.username ~'/'~ scapeProp.category.categoryName~'/'~ scapeProp.propName~'/'~imageP) }}">
+
                     <div class="caption left-align">
                         <h3>Featured Property</h3>
-                        <h5 class="light cyan-text text-lighten-1">We don't have any Properties Featured yet.</h5>
+                        <h5 class="light grey-text text-lighten-3">{{ scapeProp.propName }}</h5>
+                        <a href="#">Visit Property</a>
                     </div>
                 </li>
-            {% else %}
-                {%  set imageP = " "%}
-                {% for scapeProp in prop.scapeProperty %}
-                    {% for image in scapeProp.images %}
-                        {%  set imageP =  image.imagePath  %}
-
-                    {% endfor %}
-                    <li>
-                        <img src="{{ asset(prop_images_path ~ scapeProp.scapeUser.username ~'/'~ scapeProp.category.categoryName~'/'~ scapeProp.propName~'/'~imageP) }}">
-
-                        <div class="caption left-align">
-                            <h3>Featured Property</h3>
-                            <h5 class="light grey-text text-lighten-3">{{ scapeProp.propName }}</h5>
-                            <a href="#">Visit Property</a>
-                        </div>
-                    </li>
-                {% endfor %}
-
-                {% endif %}
-
-
-
+            {% endfor %}
 
         {% endfor %}
+        {% endif %}
 
     </ul>
 </div>
