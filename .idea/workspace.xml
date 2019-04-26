@@ -4,16 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/templates/homepage/index.html.twig" line="8" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37387c67-1b92-4aac-87d9-0c8f9a9ce2a5" name="Default Changelist" comment="MainPc">
+    <list default="true" id="37387c67-1b92-4aac-87d9-0c8f9a9ce2a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/sonata_admin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/sonata_admin.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PropertiesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PropertiesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PropertyAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PropertyAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ScapeProperties.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ScapeProperties.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ScapeUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ScapeUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/RemovePropAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/RemovePropAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/VerifyPropAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/VerifyPropAdmin.php" afterDir="false" />
     </list>
     <ignored path="C:\Users\Samurai\Desktop\SEMINAR\seminar-topnotch\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/homepage/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
+            <state>
               <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
             </state>
           </provider>
@@ -42,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/PropertiesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
+            <state relative-caret-position="816">
               <caret line="46" selection-start-line="46" selection-end-line="46" />
               <folding>
                 <element signature="e#34#58#0#PHP" expanded="true" />
@@ -57,7 +53,6 @@
             <state relative-caret-position="407">
               <caret line="106" column="79" selection-start-line="106" selection-start-column="79" selection-end-line="106" selection-end-column="79" />
               <folding>
-                <element signature="e#4378#4392#0#Twig" expanded="true" />
                 <element signature="e#5658#5672#0#Twig" expanded="true" />
               </folding>
             </state>
@@ -65,22 +60,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Admin/VerifyPropAdmin.php">
+        <entry file="file://$PROJECT_DIR$/src/Admin/AddFeaturedAdmin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+            <state relative-caret-position="432">
+              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
               <folding>
-                <element signature="e#117#148#0#PHP" expanded="true" />
+                <element signature="e#117#160#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Admin/RemovePropAdmin.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/ScapeProperties.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state relative-caret-position="480">
+              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+              <folding>
+                <element signature="e#30#78#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,17 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Admin/FeaturedAdmin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+            <state relative-caret-position="216">
+              <caret line="35" column="96" selection-start-line="35" selection-start-column="96" selection-end-line="35" selection-end-column="96" />
             </state>
           </provider>
         </entry>
@@ -125,9 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/Featured.php" />
-        <option value="$PROJECT_DIR$/src/Form/PropertyCategoryType.php" />
-        <option value="$PROJECT_DIR$/src/Form/FeaturedType.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/config/packages/swiftmailer.yaml" />
         <option value="$PROJECT_DIR$/templates/form/emailVerification.html.twig" />
@@ -170,12 +156,15 @@
         <option value="$PROJECT_DIR$/templates/form/filterPropertyForm.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/PropertiesController.php" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/ScapeProperties.php" />
         <option value="$PROJECT_DIR$/src/Entity/PropertyAddress.php" />
         <option value="$PROJECT_DIR$/src/Entity/ScapeUser.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
-        <option value="$PROJECT_DIR$/src/Admin/RemovePropAdmin.php" />
+        <option value="$PROJECT_DIR$/config/packages/sonata_admin.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/ScapeProperties.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Featured.php" />
         <option value="$PROJECT_DIR$/src/Admin/VerifyPropAdmin.php" />
+        <option value="$PROJECT_DIR$/src/Admin/RemovePropAdmin.php" />
+        <option value="$PROJECT_DIR$/src/Admin/AddFeaturedAdmin.php" />
       </list>
     </option>
   </component>
@@ -337,11 +326,6 @@
             <path>
               <item name="seminar-topnotch" type="b2602c69:ProjectViewProjectNode" />
               <item name="seminar-topnotch" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seminar-topnotch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seminar-topnotch" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -355,12 +339,6 @@
               <item name="seminar-topnotch" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seminar-topnotch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seminar-topnotch" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="seminar-topnotch" type="b2602c69:ProjectViewProjectNode" />
@@ -494,7 +472,8 @@
       <workItem from="1553445352399" duration="7661000" />
       <workItem from="1553478644584" duration="2348000" />
       <workItem from="1553619985250" duration="5369000" />
-      <workItem from="1556286377103" duration="3835000" />
+      <workItem from="1556286377103" duration="4467000" />
+      <workItem from="1556292488066" duration="3507000" />
     </task>
     <task id="LOCAL-00001" summary="MainPc">
       <created>1552915484474</created>
@@ -601,11 +580,18 @@
       <option name="project" value="LOCAL" />
       <updated>1553614430831</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="MainPc">
+      <created>1556290239086</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1556290239086</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194353000" />
+    <option name="totallyTimeSpent" value="198492000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -620,7 +606,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64525545" visible="true" weight="0.20362474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64525545" visible="true" weight="0.20575693" />
       <window_info id="Structure" order="1" sideWeight="0.35474452" side_tool="true" weight="0.20362474" />
       <window_info id="Favorites" order="2" sideWeight="0.31723028" side_tool="true" weight="0.13059701" />
       <window_info id="npm" order="3" sideWeight="0.35474452" side_tool="true" weight="0.20362474" />
@@ -634,8 +620,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32998884" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49253732" visible="true" weight="0.23634337" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5074627" side_tool="true" weight="0.303233" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49200428" visible="true" weight="0.23634337" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5079957" side_tool="true" weight="0.23634337" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49903476" weight="0.32887402" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -727,23 +713,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/ForgotpasswordController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="99" column="41" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
-          <folding>
-            <element signature="e#34#59#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/ScapeUserType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
@@ -756,16 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="596">
           <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Featured.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="80" column="21" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
-          <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -999,41 +958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/homepage/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/PropertiesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="106" column="79" selection-start-line="106" selection-start-column="79" selection-end-line="106" selection-end-column="79" />
-          <folding>
-            <element signature="e#4378#4392#0#Twig" expanded="true" />
-            <element signature="e#5658#5672#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/FeaturedAdmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/PropertyAddress.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -1048,36 +972,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ScapeProperties.php">
+    <entry file="file://$PROJECT_DIR$/templates/homepage/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/PropertiesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/sonata_admin.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="69" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Featured.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="22" />
+          <caret line="83" column="27" lean-forward="true" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+    <entry file="file://$PROJECT_DIR$/src/Admin/FeaturedAdmin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="20" />
+        <state relative-caret-position="24">
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Admin/RemovePropAdmin.php">
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        <state relative-caret-position="216">
+          <caret line="35" column="96" selection-start-line="35" selection-start-column="96" selection-end-line="35" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ScapeProperties.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Admin/VerifyPropAdmin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        <state relative-caret-position="336">
+          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
           <folding>
             <element signature="e#117#148#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="106" column="79" selection-start-line="106" selection-start-column="79" selection-end-line="106" selection-end-column="79" />
+          <folding>
+            <element signature="e#5658#5672#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/RemovePropAdmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+          <folding>
+            <element signature="e#117#141#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Admin/AddFeaturedAdmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+          <folding>
+            <element signature="e#117#160#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

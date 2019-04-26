@@ -33,7 +33,7 @@ services:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\PropertyCategory, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: 'PropertyDetails',label: PropertyCategory }
+            - { name: sonata.admin, manager_type: orm, group: 'PropertyDetails',label: Property Category }
     admin.featured:
         class: App\Admin\FeaturedAdmin
         arguments: [~, App\Entity\Featured, ~]

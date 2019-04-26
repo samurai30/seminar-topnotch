@@ -36,7 +36,7 @@ class VerifyPropAdmin extends AbstractAdmin
                 'editable' => true,
                 'class' => ScapeProperties::class,
                 'choices' => [
-                    'available' => 'available'
+                    'available' => 'Verify'
                 ],
             ]);
     }
