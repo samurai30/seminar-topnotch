@@ -33,13 +33,22 @@ services:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\PropertyCategory, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: PropertyCategory }
+            - { name: sonata.admin, manager_type: orm, group: 'PropertyDetails',label: PropertyCategory }
     admin.featured:
         class: App\Admin\FeaturedAdmin
         arguments: [~, App\Entity\Featured, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Featured }
-
+            - { name: sonata.admin, manager_type: orm,  group: 'PropertyDetails', label: Featured }
+    admin.verifyprop:
+        class: App\Admin\VerifyPropAdmin
+        arguments: [~, App\Entity\ScapeProperties, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'PropertyVerification', label: VerifyProperties }
+    admin.removeprop:
+        class: App\Admin\RemovePropAdmin
+        arguments: [~, App\Entity\ScapeProperties, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'PropertyDetails', label: Properties }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
