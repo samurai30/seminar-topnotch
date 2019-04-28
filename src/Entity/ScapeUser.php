@@ -126,9 +126,21 @@ class ScapeUser implements UserInterface,\Serializable
      */
     private $profilePicPath;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Appointment", mappedBy="scapeUser", orphanRemoval=true)
+     */
+    private $appointment;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Appointment", mappedBy="sacpeVendor", orphanRemoval=true)
+     */
+    private $vendorAppointment;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->appointment = new ArrayCollection();
+        $this->vendorAppointment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -372,5 +384,67 @@ class ScapeUser implements UserInterface,\Serializable
     public function __toString()
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection|Appointment[]
+     */
+    public function getAppointment(): Collection
+    {
+        return $this->appointment;
+    }
+
+    public function addAppointment(Appointment $appointment): self
+    {
+        if (!$this->appointment->contains($appointment)) {
+            $this->appointment[] = $appointment;
+            $appointment->setScapeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppointment(Appointment $appointment): self
+    {
+        if ($this->appointment->contains($appointment)) {
+            $this->appointment->removeElement($appointment);
+            // set the owning side to null (unless already changed)
+            if ($appointment->getScapeUser() === $this) {
+                $appointment->setScapeUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Appointment[]
+     */
+    public function getVendorAppointment(): Collection
+    {
+        return $this->vendorAppointment;
+    }
+
+    public function addVendorAppointment(Appointment $vendorAppointment): self
+    {
+        if (!$this->vendorAppointment->contains($vendorAppointment)) {
+            $this->vendorAppointment[] = $vendorAppointment;
+            $vendorAppointment->setSacpeVendor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVendorAppointment(Appointment $vendorAppointment): self
+    {
+        if ($this->vendorAppointment->contains($vendorAppointment)) {
+            $this->vendorAppointment->removeElement($vendorAppointment);
+            // set the owning side to null (unless already changed)
+            if ($vendorAppointment->getSacpeVendor() === $this) {
+                $vendorAppointment->setSacpeVendor(null);
+            }
+        }
+
+        return $this;
     }
 }

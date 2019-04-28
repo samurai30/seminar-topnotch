@@ -8,6 +8,8 @@ require('materialize-css/dist/js/materialize');
 require('../sass/sass.scss');
 const axios = require('axios/dist/axios');
 
+global.axios = axios;
+
 /*ajax register form*/
 $('#registerFormContainer').on("submit",function (e) {
     e.preventDefault();
@@ -95,6 +97,10 @@ $('#propertyContainer').on('click', function (e) {
             $('#loaderProperties').html(loader);
             mainUrl = url;
             $('#propFilterForm').submit();
+        }else if(url.startsWith("/view/property")){
+
+            window.open(url,'_blank');
+
         }
     }
     e.preventDefault();
@@ -177,3 +183,4 @@ $(window).on('scroll', function () {
     }
 
 });
+

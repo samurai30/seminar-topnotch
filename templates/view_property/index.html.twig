@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ property.propName }}{% endblock %}
+
+{% block body %}
+
+    <div id="view_prop_body">
+
+        <main id="main_view_prop">
+
+                <div class="container">
+                        <div class="row">
+                            <div class="center">
+                                <h3>{{ property.propName }}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="carousel carousel-slider" style="max-height: 600px">
+                                {% for image in property.images %}
+                                    <a class="carousel-item" href="#{{ image.id }}!"><img class="activator" src="{{ asset(prop_images_path ~ property.scapeUser.username ~'/'~ property.category.categoryName~'/'~ property.propName~'/'~image.imagePath) }}" alt="{{ property.propName }}"></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="center">
+                               {% if app.user.appointment. %}
+
+                                {% else %}
+                                    <button class="btn large" id="book_apoint">Book Appointment</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                </div>
+
+        </main>
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+ {{ parent() }}
+    <script>
+        //book_appointment
+        $('#book_apoint').click(function () {
+
+            axios.post('{{ path('appointment',{vendor_id: property.scapeUser.id, propId: property.id }) }}').then((res)=>{
+
+                $.alert({
+                    title: 'Success',
+                    content: res.data,
+                });
+            });
+
+
+        });
+    </script>
+{% endblock %}

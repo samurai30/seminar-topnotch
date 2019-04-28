@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Appointment;
 use App\Entity\Featured;
 use App\Entity\ScapeProperties;
+use App\Entity\ScapeUser;
 use App\Form\PropertyFilterType;
 use App\Repository\FeaturedRepository;
 use App\Repository\PropertyAddressRepository;
@@ -11,7 +13,9 @@ use App\Repository\ScapePropertiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -98,6 +102,45 @@ class PropertiesController extends AbstractController
             [
                 'properties' => $properties
             ]);
+    }
+
+    /**
+     * @Route("/api/appointment/{vendor_id}{propId}", name="appointment")
+     * @Security("is_granted(['ROLE_USER','ROLE_VENDOR'])")
+     * @param $vendor_id
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param $propId
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function appointmentBook($vendor_id,Request $request,\Swift_Mailer $mailer,$propId){
+        if($request->isMethod("POST")){
+
+            $vendor = $this->getDoctrine()->getRepository(ScapeUser::class)->find($vendor_id);
+            $user = $this->getUser();
+            $property = $this->getDoctrine()->getRepository(ScapeProperties::class)->find($propId);
+            $user_id = $user->getId();
+            if($vendor_id == $user_id){
+                return $this->json('Sorry you cannot book your own property',Response::HTTP_OK);
+            }else{
+                $appt = new Appointment();
+                $em = $this->getDoctrine()->getManager();
+                $appt->setScapeUser($user);
+                $appt->setSacpeVendor($vendor);
+                $appt->setScapeProperty($property);
+                $appt->setAppStatus("pending");
+                $em->persist($appt);
+                $em->flush();
+                return $this->json($propId,Response::HTTP_OK);
+            }
+
+        }else{
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
+
     }
 
 

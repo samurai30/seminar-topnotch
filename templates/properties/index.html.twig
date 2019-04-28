@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">{{ props.propName }}<i class="material-icons right">more_vert</i></span>
-                        <p><a href="#">view property</a></p>
+                        <a class="link" href="{{ path('view_property',{ id: props.id }) }}">view property</a>
                         <div class="chip">
                             {{ props.propDetails.propPrice }}
                         </div>

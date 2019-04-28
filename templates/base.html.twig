@@ -8,7 +8,9 @@
 
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href='https://fonts.googleapis.com/css?family=Bungee' rel='stylesheet'>
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
             <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+
         {% endblock %}
 
     </head>
@@ -172,8 +174,9 @@
         {% block javascripts %}
 
         <script src="{{ asset('build/app.js') }}"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
-        <script>
+            <script>
             function login(forms,loader){
                 $(loader).show();
                 var form = $(forms);

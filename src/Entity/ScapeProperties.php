@@ -68,9 +68,15 @@ class ScapeProperties
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Appointment", mappedBy="scapeProperty", orphanRemoval=true)
+     */
+    private $scapeAppointments;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->scapeAppointments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,5 +213,36 @@ class ScapeProperties
     public function __toString()
     {
        return $this->propName;
+    }
+
+    /**
+     * @return Collection|Appointment[]
+     */
+    public function getScapeAppointments(): Collection
+    {
+        return $this->scapeAppointments;
+    }
+
+    public function addScapeAppointment(Appointment $scapeAppointment): self
+    {
+        if (!$this->scapeAppointments->contains($scapeAppointment)) {
+            $this->scapeAppointments[] = $scapeAppointment;
+            $scapeAppointment->setScapeProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScapeAppointment(Appointment $scapeAppointment): self
+    {
+        if ($this->scapeAppointments->contains($scapeAppointment)) {
+            $this->scapeAppointments->removeElement($scapeAppointment);
+            // set the owning side to null (unless already changed)
+            if ($scapeAppointment->getScapeProperty() === $this) {
+                $scapeAppointment->setScapeProperty(null);
+            }
+        }
+
+        return $this;
     }
 }
