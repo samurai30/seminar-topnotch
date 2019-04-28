@@ -146,6 +146,7 @@ $(window).on('load', function () {
             preventScrolling: false
 
         });
+        $('#sidenav-1').sidenav({ edge: 'left' });
         $('.parallax').parallax();
         $('.scrollspy').scrollSpy();
         $('.scrollspy').scrollSpy({

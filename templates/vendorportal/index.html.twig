@@ -3,6 +3,33 @@
 {% block title %}Scape-Vendor{% endblock %}
 
 {% block body %}
+<div style="min-height: 60em;padding-left: 300px;" >
 
 
+    <ul id="sidenav-1" class="sidenav sidenav-fixed" style="z-index: 0; padding-top: 3%; ">
+        <li><a class="subheader grey lighten-1 white-text" >VENDOR PANEL</a></li>
+        <li><a href="{{ path('vendorportalAdd') }}">ADD-PROPERTIES</a></li>
+        <li><a href="{{ path('vendorportalList',{ vendor_id: app.user.id }) }}">PROPERTIES</a></li>
+        <li><a href="">APPOINTMENTS</a></li>
+    </ul>
+    <div class="container">
+
+    </div>
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+
+    <script>
+
+        {% for msg in app.flashes('property_added') %}
+        $.alert({
+            title: 'Added Property',
+            content: '{{ msg }}'
+        })
+        {% endfor %}
+
+    </script>
 {% endblock %}

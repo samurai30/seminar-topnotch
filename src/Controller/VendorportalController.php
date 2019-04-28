@@ -8,8 +8,10 @@ use App\Form\VendorPropertyAddType;
 use App\Repository\PropertyCategoryRepository;
 use App\Repository\ScapePropertiesRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,15 +38,13 @@ class VendorportalController extends AbstractController
      */
 
     public function index(){
-
-
         return $this->render('vendorportal/index.html.twig');
     }
 
     /**
      * @Route("/vendorportal/add", name="vendorportalAdd")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addProp(Request $request)
     {
@@ -72,9 +72,42 @@ class VendorportalController extends AbstractController
             $em->persist($property);
             $em->flush();
             $this->flashBag->add('property_added','successfully added');
+            return $this->redirectToRoute('vendorportal');
         }
-        return $this->render('vendorportal/index.html.twig', [
+        return $this->render('vendorportal/addPropForm.html.twig', [
             'form' => $form->createView()
+        ]);
+
+    }
+
+    /**
+     * @Route("/vendorportal/list/{vendor_id}",name="vendorportalList")
+     * @param Request $request
+     * @param $vendor_id
+     * @Security("is_granted(['ROLE_VENDOR'])")
+     * @return Response
+     */
+    public function propList(Request $request,$vendor_id){
+        $prop = $this->getDoctrine()->getRepository(ScapeProperties::class)->findBy(['scapeUser' => $vendor_id]);
+        return $this->render('vendorportal/listProp.html.twig',[
+            'properties' => $prop
+        ]);
+    }
+
+    /**
+     * @Route("/vendorportal/delete/{prop_id}",name="vendorportalDelete")
+     * @param Request $request
+     * @param $prop_id
+     * @return Response
+     */
+    public function deleteProp(Request $request,$prop_id){
+
+
+
+        $prop = $this->getDoctrine()->getRepository(ScapeProperties::class)->findBy(['scapeUser'=> $this->getUser()->getId()]);
+
+        return $this->render('vendorportal/listProp.html.twig',[
+            'properties' => $prop
         ]);
 
     }

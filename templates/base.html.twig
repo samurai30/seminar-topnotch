@@ -58,17 +58,21 @@
                 <li><a href="#!" class="cyan-text">Profile</a></li>
                 <li><a href="#!" class="cyan-text">Appointments</a></li>
                 <li class="divider" tabindex="-1"></li>
-                 {% if app.user.verified == 'unverified' %}
+                {% if is_granted('ROLE_USER') %}
+                    {% if app.user.verified == 'unverified' %}
 
-                    <li> <div class="center">
-                            <p class="red-text">Please Verify</p>
-                        </div></li>
+                        <li> <div class="center">
+                                <p class="red-text">Please Verify</p>
+                            </div></li>
 
-                {% elseif app.user.verified == 'verified' %}
+                    {% elseif app.user.verified == 'verified' %}
 
-                    <li> <div class="center">
-                            <p class="blue-text lighten-4">Verified</p>
-                        </div></li>
+                        <li> <div class="center">
+                                <p class="blue-text lighten-4">Verified</p>
+                            </div></li>
+
+                    {% endif %}
+
 
                 {% endif %}
             </ul>
@@ -181,9 +185,23 @@
                             <h5 class="white-text">CONTACT US</h5>
                             <hr>
                             <ul>
-                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> E-mail</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> Facebook</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> Instagram</a></li>
+                                <li><div class="valign-wrapper">
+                                   <div id="form-contact">
+                                       <form>
+                                           <div class="row">
+                                               <div class="input-field inline">
+                                                   <input type="text" placeholder="Enter your E-mail" required>
+
+                                               </div>
+                                               <div class="input-field inline">
+                                                   <button type="submit" value="Send" class="btn cyan"><i class="material-icons">email</i></button>
+                                               </div>
+                                           </div>
+                                       </form>
+                                   </div>
+                                    </div></li>
+                                <li><div class="valign-wrapper"><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">face</i><span>Facebook</span></a></div></li>
+                                <li><div class="valign-wrapper"><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">center_focus_strong</i><span>Instagram</span></a></div></li>
                              </ul>
                         </div>
                     </div>
