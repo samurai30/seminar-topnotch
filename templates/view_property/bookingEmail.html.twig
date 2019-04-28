@@ -1,0 +1,21 @@
+<h3>Hey {{ users.username }}:</h3>
+<p>we have successfully forwarded your Appointment request:</p>
+<h5>Details of the Request</h5>
+<table>
+    <thead>
+    <tr>
+        <th>Property Name</th>
+        <th>Vendor Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ property.propName }}</td>
+        <td>{{ vendor.userFirstName~' '~vendor.userLastName }}</td>
+    </tr>
+    </tbody>
+
+</table>
+<br>
+<h5>We will email you once your appointment date is set by the vendor.</h5>
+<h5>Thank you for your time.</h5>

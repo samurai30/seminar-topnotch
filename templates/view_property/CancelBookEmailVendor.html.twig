@@ -1,0 +1,20 @@
+<h3>Hey {{ vendor.username  }}:</h3>
+<p>User {{ users.username }}, has canceled the appointment:</p>
+<h5>Details of Cancellation</h5>
+<table>
+    <thead>
+    <tr>
+        <th>Property Name</th>
+        <th>Customer Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ property.propName }}</td>
+        <td>{{ users.userFirstName~' '~users.userLastName }}</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h5>Hope you have a great day.</h5>
+<h5>Thank you for your time.</h5>

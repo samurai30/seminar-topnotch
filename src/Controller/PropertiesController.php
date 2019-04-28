@@ -15,6 +15,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -111,38 +112,133 @@ class PropertiesController extends AbstractController
      * @param Request $request
      * @param \Swift_Mailer $mailer
      * @param $propId
+     * @param EntityManagerInterface $em
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\DBAL\ConnectionException
      */
-    public function appointmentBook($vendor_id,Request $request,\Swift_Mailer $mailer,$propId){
-        if($request->isMethod("POST")){
+    public function appointmentBook($vendor_id,Request $request,\Swift_Mailer $mailer,$propId,EntityManagerInterface $em){
 
-            $vendor = $this->getDoctrine()->getRepository(ScapeUser::class)->find($vendor_id);
-            $user = $this->getUser();
-            $property = $this->getDoctrine()->getRepository(ScapeProperties::class)->find($propId);
-            $user_id = $user->getId();
-            if($vendor_id == $user_id){
-                return $this->json('Sorry you cannot book your own property',Response::HTTP_OK);
-            }else{
-                $appt = new Appointment();
-                $em = $this->getDoctrine()->getManager();
-                $appt->setScapeUser($user);
-                $appt->setSacpeVendor($vendor);
-                $appt->setScapeProperty($property);
-                $appt->setAppStatus("pending");
-                $em->persist($appt);
-                $em->flush();
-                return $this->json($propId,Response::HTTP_OK);
-            }
+
+        if($request->isMethod("POST")){
+            $em->getConnection()->beginTransaction();
+
+            try{
+                $vendor = $this->getDoctrine()->getRepository(ScapeUser::class)->find($vendor_id);
+                $user = $this->getUser();
+                $property = $this->getDoctrine()->getRepository(ScapeProperties::class)->find($propId);
+                $user_id = $user->getId();
+                if($vendor_id == $user_id){
+                    return $this->json('Sorry you cannot book your own property',Response::HTTP_OK);
+                }else{
+                    $appt = new Appointment();
+                    $appt->setScapeUser($user);
+                    $appt->setSacpeVendor($vendor);
+                    $appt->setScapeProperty($property);
+                    $appt->setAppStatus("pending");
+                    $message = (new \Swift_Message('Scape-360: Appointment Request'))
+                        ->setFrom('samurai3095@gmail.com')
+                        ->setTo($user->getUserEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'view_property/bookingEmail.html.twig',
+                                ['users' => $user,
+                                    'vendor' => $vendor,
+                                    'property' => $property]
+                            ),
+                            'text/html'
+                        );
+                    $message2 = (new \Swift_Message('Scape-360: Appointment Request'))
+                        ->setFrom('samurai3095@gmail.com')
+                        ->setTo($vendor->getUserEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'view_property/bookingEmailVendor.html.twig',
+                                ['users' => $user,
+                                    'vendor' => $vendor,
+                                    'property' => $property]
+                            ),
+                            'text/html'
+                        );
+                    $mailer->send($message);
+                    $mailer->send($message2);
+                    $em->persist($appt);
+                    $em->flush();
+                    $em->getConnection()->commit();
+                    return $this->json('Successfully requested appointment',Response::HTTP_OK);
+                }
+            }catch (Exception $e) {
+                $em->getConnection()->rollBack();
+                throw $e;}
 
         }else{
-
             return $this->redirectToRoute('homepage');
         }
 
 
-
     }
 
+
+    /**
+     * @Route("/api/appointmentCancel/{vendor_id}{propId}", name="cancelAppt")
+     * @Security("is_granted(['ROLE_USER','ROLE_VENDOR'])")
+     * @param $vendor_id
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param $propId
+     * @param EntityManagerInterface $em
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\DBAL\ConnectionException
+     */
+    public function appointmentCancel($vendor_id,Request $request,\Swift_Mailer $mailer,$propId,EntityManagerInterface $em){
+        if($request->isMethod("POST")){
+
+            $em->getConnection()->beginTransaction();
+            try {
+                $vendor = $this->getDoctrine()->getRepository(ScapeUser::class)->find($vendor_id);
+                $user = $this->getUser();
+                $property = $this->getDoctrine()->getRepository(ScapeProperties::class)->find($propId);
+                $user_id = $user->getId();
+                $appt = $this->getDoctrine()->getRepository(Appointment::class)->findOneBy(['scapeUser' => $user_id, 'scapeProperty' => $propId, 'sacpeVendor' => $vendor_id]);
+
+                $em->remove($appt);
+                $em->flush();
+
+                $message = (new \Swift_Message('Scape-360: Appointment Cancellation'))
+                    ->setFrom('samurai3095@gmail.com')
+                    ->setTo($user->getUserEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'view_property/CancelBookEmail.html.twig',
+                            ['users' => $user,
+                                'vendor' => $vendor,
+                                'property' => $property]
+                        ),
+                        'text/html'
+                    );
+                $message2 = (new \Swift_Message('Scape-360: Appointment Cancellation'))
+                    ->setFrom('samurai3095@gmail.com')
+                    ->setTo($vendor->getUserEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'view_property/CancelBookEmailVendor.html.twig',
+                            ['users' => $user,
+                                'vendor' => $vendor,
+                                'property' => $property]
+                        ),
+                        'text/html'
+                    );
+                $mailer->send($message);
+                $mailer->send($message2);
+                $em->getConnection()->commit();
+                return $this->json('Successfully requested appointment',Response::HTTP_OK);
+
+            } catch (Exception $e) {
+                $em->getConnection()->rollBack();
+                throw $e;}
+        }else{
+            return $this->redirectToRoute('homepage');
+        }
+    }
 
 
 
