@@ -10,7 +10,7 @@
                     <img class="responsive-img" src="{{ asset('build/images/Logo.f9a8d821.png') }}" alt="Logo">
                 </div>
                 <div class="col s12">
-                    <a href="#propertySection" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');"></a>
+                    <a href="#propertySectionScroll" id="menu" class="waves-effect waves-light btn btn-floating cyan lighten-3 pulse" onclick="$('.tap-target').tapTarget('close');"></a>
                 </div>
             </div>
         </div>
@@ -33,10 +33,17 @@
         <!-- feature discovery!-->
 
         <!-- properties!-->
-               <div class="section scrollspy center-align" id="propertySection">
+                <div class="center scrollspy" id="propertySectionScroll">
+
+                    <p>FILTER</p>
+                    <a href="#" data-target="slide-out2" class="sidenav-trigger cyan-text"><i class="material-icons medium">tune
+                        </i></a>
+
+                </div>
+               <div class="section center-align" id="propertySection">
                            {{ render(controller('App\\Controller\\PropertiesController::getFilterForm')) }}
                </div>
-                <div id="propertyContainer">
+                <div class="container" id="propertyContainer">
 
                 </div>
         <!-- properties!-->

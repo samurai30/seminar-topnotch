@@ -11,6 +11,7 @@ namespace App\Admin;
 
 use App\Entity\Featured;
 use App\Entity\ScapeUser;
+use App\Repository\FeaturedRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,9 +20,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RemovePropAdmin extends AbstractAdmin
 {
+
+
     protected $baseRouteName = 'admin_vendor_removeprop_scapeproperty';
 
     protected $baseRoutePattern = 'scapeproperty-remove';
+
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
@@ -36,11 +40,17 @@ class RemovePropAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list)
     {
+
        $list->add('propName',null,['label' => 'Property Name'])
            ->add('scapeUser',null,[
                'class' => ScapeUser::class,
                'label' => 'Vendor Username'
-           ]);
+           ])
+           ->add('featured','choice',[
+               'editable' => true,
+               'class' => Featured::class,
+            ])
+       ;
 
     }
     public function createQuery($context = 'list')

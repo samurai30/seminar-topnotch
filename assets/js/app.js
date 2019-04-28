@@ -142,10 +142,14 @@ $(window).on('load', function () {
 
         });
         $('.sidenav').sidenav();
+        $('.sidenav').sidenav({
+            preventScrolling: false
+
+        });
         $('.parallax').parallax();
         $('.scrollspy').scrollSpy();
         $('.scrollspy').scrollSpy({
-            scrollOffset: 40
+            scrollOffset: 90
         });
         $('select').formSelect();
         $('.slider').slider();
@@ -153,6 +157,12 @@ $(window).on('load', function () {
             interval: 3000,
             height: 600
         });
+        $('.dropdown-trigger').dropdown();
+        $('.dropdown-trigger').dropdown({
+            alignment: 'right',
+            hover: true
+        })
+
 
     }, 600);
 

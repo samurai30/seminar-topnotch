@@ -30,12 +30,23 @@ class VendorportalController extends AbstractController
         $this->flashBag = $flashBag;
     }
 
+
     /**
-     * @Route("/vendorportal/add", name="vendorportal")
+     * @Route("/vendorportal",name="vendorportal")
+     */
+
+    public function index(){
+
+
+        return $this->render('vendorportal/index.html.twig');
+    }
+
+    /**
+     * @Route("/vendorportal/add", name="vendorportalAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function addProp(Request $request)
     {
         $property = new ScapeProperties();
         $form = $this->createForm(VendorPropertyAddType::class,$property);

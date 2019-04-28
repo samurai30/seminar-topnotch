@@ -8,13 +8,17 @@
 
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href='https://fonts.googleapis.com/css?family=Bungee' rel='stylesheet'>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Abel|Comfortaa|Muli|Pacifico" rel="stylesheet">
+
+            <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
             <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
             <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 
         {% endblock %}
 
     </head>
-    <body>
+    <body class="TitleClass">
     {% block loader %}
         {{ include('loader/loader.html.twig') }}
     {% endblock %}
@@ -31,16 +35,11 @@
 
                             <ul class="right hide-on-med-and-down">
                                 {% if is_granted('ROLE_USER') %}
-                                    <li>Welcome: {{ app.user.username }}</li>
-                                    {% if app.user.verified == 'unverified' %}
 
-                                        <li> Please verify</li>
+                                    <li>
+                                        <a class='dropdown-trigger btn cyan lighten-2' href='#' data-target='userdropdown'>Welcome: {{ app.user.username }}</a></li>
 
-                                    {% elseif app.user.verified == 'verified' %}
 
-                                        <li> Verified</li>
-
-                                    {% endif %}
                                     {% if is_granted('ROLE_VENDOR') %}
                                         <li><a href="{{ path('vendorportal') }}">Vendor Panel</a></li>
                                     {% endif %}
@@ -55,6 +54,24 @@
                     </div>
                 </div>
             </nav>
+            <ul id='userdropdown' class='dropdown-content'>
+                <li><a href="#!" class="cyan-text">Profile</a></li>
+                <li><a href="#!" class="cyan-text">Appointments</a></li>
+                <li class="divider" tabindex="-1"></li>
+                 {% if app.user.verified == 'unverified' %}
+
+                    <li> <div class="center">
+                            <p class="red-text">Please Verify</p>
+                        </div></li>
+
+                {% elseif app.user.verified == 'verified' %}
+
+                    <li> <div class="center">
+                            <p class="blue-text lighten-4">Verified</p>
+                        </div></li>
+
+                {% endif %}
+            </ul>
             <ul class="sidenav" id="mobile-demo">
                 {% if is_granted('ROLE_USER') %}
                     <li><div class="user-view">
@@ -68,7 +85,16 @@
                         </div></li>
 
                     <li><div class="divider"></div></li>
+                    <li><a href="#!" class="cyan-text">Profile</a></li>
+                    <li><a href="#!" class="cyan-text">Appointments</a></li>
+                    <li><div class="divider"></div></li>
+
+                    {% if is_granted('ROLE_VENDOR') %}
+                        <li><a href="{{ path('vendorportal') }}">Vendor Panel</a></li>
+                    {% endif %}
+                    <li><div class="divider"></div></li>
                     <li><a class="modal-trigger waves-effect" href="{{ path('security_logout') }}">Logout</a></li>
+
                 {% else %}
                     <li><a class="modal-trigger" href="#loginModal" data-target="loginModal">Login</a></li>
                     <li><div class="divider"></div></li>
@@ -144,7 +170,7 @@
 
     </div>
         {% block footer %}
-            <footer class="page-footer cyan darken-4">
+            <footer class="page-footer grey darken-3">
                 <div class="container">
                     <div class="row">
                         <div class="col l6 s12">
@@ -152,20 +178,20 @@
                             <p class="grey-text text-lighten-4"></p>
                         </div>
                         <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text">Links</h5>
+                            <h5 class="white-text">CONTACT US</h5>
+                            <hr>
                             <ul>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                            </ul>
+                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> E-mail</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> Facebook</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!"><i class="material-icons">send</i> Instagram</a></li>
+                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="footer-copyright">
+                <div class="footer-copyright grey darken-4">
                     <div class="container">
-                        © 2014 Copyright Text
-                        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                        © 2019 Copyright SCAPE-360
+                        <a class="grey-text text-lighten-4 right" href="#!">SCAPE-OUT</a>
                     </div>
                 </div>
             </footer>

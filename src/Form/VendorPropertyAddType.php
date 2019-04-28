@@ -31,7 +31,10 @@ class VendorPropertyAddType extends AbstractType
             ->add('Images', FileType::class,[
                 'mapped' => false,
                 'label' => 'Please Upload Images',
-                'multiple' => true
+                'multiple' => true,
+                'attr' =>[
+                    'accept' => 'image/*'
+                ]
             ])
         ;
     }

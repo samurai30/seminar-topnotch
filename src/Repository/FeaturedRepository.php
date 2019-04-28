@@ -29,6 +29,19 @@ class FeaturedRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getFeautredTypes(){
+
+        $results = $this->createQueryBuilder('c')
+            ->getQuery()
+            ->getResult();
+
+        $cityArray = [];
+        foreach ($results as $result){
+            $cityArray += [$result->getId() => $result->getType()];
+        }
+         return $cityArray;
+    }
     // /**
     //  * @return Featured[] Returns an array of Featured objects
     //  */

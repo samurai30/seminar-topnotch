@@ -1,0 +1,21 @@
+<div class="container" style="margin-top: 4%; margin-bottom: 10%">
+    <div class="row">
+        <div class="center-align">
+            <h3 class="TitleClass">Add Property</h3>
+        </div>
+    </div>
+    {% form_theme form 'themes/materialize.html.twig' %}
+    {{ form_start(form) }}
+
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>File</span>
+            {{ form_widget(form.Images) }}
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
