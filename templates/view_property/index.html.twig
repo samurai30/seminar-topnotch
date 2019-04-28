@@ -102,6 +102,23 @@
                                 }
                             });
 
+                        }).catch((error)=>{
+
+                            if (error.response) {
+                                $.alert({
+                                    title:'Bad Response',
+                                    content: 'something bad happened'
+                                });
+                            } else if (error.request) {
+                                $.alert({
+                                    title:'Bad Response',
+                                    content: 'something bad happened'
+                                });
+                            } else {
+                                console.log(error.config);
+                            }
+
+
                         });
                     },
                     cancel: function () {
